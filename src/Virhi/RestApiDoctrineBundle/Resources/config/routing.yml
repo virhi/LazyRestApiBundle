@@ -13,3 +13,7 @@ virhi_rest_api_doctrine_list_object:
 virhi_rest_api_doctrine_object:
     path:     /api/object/{name}
     defaults: { _controller: VirhiRestApiDoctrineBundle:Object:object }
+
+virhi_rest_api_doctrine_list_entity:
+    path:     /api/entity/{name}
+    defaults: { _controller: VirhiRestApiDoctrineBundle:Entity:listEntity }

@@ -51,4 +51,5 @@ class ObjectController extends Controller
         $reponse    = new HalResponse($resource);
         return $reponse;
     }
-} 
+
+}
