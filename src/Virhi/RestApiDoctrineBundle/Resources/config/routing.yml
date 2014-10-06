@@ -1,3 +1,15 @@
-virhi_rest_api_doctrine_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Default:index }
+virhi_rest_api_doctrine_api:
+    path:     /api/doctrine
+    defaults: { _controller: VirhiRestApiDoctrineBundle:Api:api }
+
+virhi_rest_api_doctrine_entit_info:
+    path:     /api/info
+    defaults: { _controller: VirhiRestApiDoctrineBundle:Api:entitInfo }
+
+virhi_rest_api_doctrine_list_object:
+    path:     /api/objects
+    defaults: { _controller: VirhiRestApiDoctrineBundle:Object:listObject }
+
+virhi_rest_api_doctrine_object:
+    path:     /api/object/{name}
+    defaults: { _controller: VirhiRestApiDoctrineBundle:Object:object }
