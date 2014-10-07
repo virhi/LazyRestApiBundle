@@ -12,19 +12,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Alterway\Bundle\RestHalBundle\Response\HalResponse;
 use Virhi\RestApiDoctrineBundle\Api\Factory\ListEntityResourceFactory;
 use Virhi\RestApiDoctrineBundle\Api\Factory\EntityResourceFactory;
-use Virhi\RestApiDoctrineBundle\Api\Context\ListEntityContext;
-use Virhi\RestApiDoctrineBundle\Api\Context\EntityContext;
-use Doctrine\ORM\AbstractQuery;
+
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\ListEntityContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\EntityContext;
+
+use Virhi\RestApiDoctrineBundle\Api\Query\Context\Entity\ListEntityContext as QueryListEntityContext;
+use Virhi\RestApiDoctrineBundle\Api\Query\Context\Entity\EntityContext as QueryEntityContext;
 
 class EntityController extends Controller
 {
     public function listEntityAction($name)
     {
-        $qb = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
-        $qb->select('x')
-            ->from('VirhiSymfonyDomainBundle:' .ucfirst($name), 'x');
+        $queryContext = new QueryListEntityContext($name);
 
-        $entitys = $qb->getQuery()->getArrayResult();
+        $query        = $this->get('virhi_rest_api_doctrine.query.entity.list_entity');
+        $entitys      = $query->execute($queryContext);
+
 
         $context  = new ListEntityContext($entitys, $this->get('router'));
         $resource = ListEntityResourceFactory::buildResource($context);
@@ -34,14 +37,11 @@ class EntityController extends Controller
 
     public function entityAction($name, $id)
     {
-        $qb = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
-        $qb->select('x')
-            ->from('VirhiSymfonyDomainBundle:' .ucfirst($name), 'x')
-            ->where('x.id = :id')
-            ->setParameter('id', $id)
-        ;
+        $queryContext = new QueryEntityContext($id, $name);
+        $query = $this->get('virhi_rest_api_doctrine.query.entity.entity');
 
-        $entity  = $qb->getQuery()->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
+        $entity   = $query->execute($queryContext);
+
         $context  = new EntityContext($entity, $this->get('router'));
         $resource = EntityResourceFactory::buildResource($context);
         $reponse  = new HalResponse($resource);

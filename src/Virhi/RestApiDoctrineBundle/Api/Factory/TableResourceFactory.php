@@ -9,9 +9,9 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Factory;
 
 use Virhi\RestApiDoctrineBundle\Api\Resources\TableRessource;
-use Virhi\RestApiDoctrineBundle\Api\Context\Context;
-use Virhi\RestApiDoctrineBundle\Api\Context\TableContext;
-use Virhi\RestApiDoctrineBundle\Api\Context\ColumnContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\Context;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\TableContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\ColumnContext;
 
 class TableResourceFactory extends ResourceFactory implements ResourceFactoryInterface
 {

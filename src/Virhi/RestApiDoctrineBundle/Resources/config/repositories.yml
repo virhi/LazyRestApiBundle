@@ -1,0 +1,24 @@
+parameters:
+    virhi_rest_api_doctrine.repository.entity.finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder
+    virhi_rest_api_doctrine.repository.entity.list_finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\ListFinder
+
+    virhi_rest_api_doctrine.repository.object.finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Object\Finder
+    virhi_rest_api_doctrine.repository.object.list_finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Object\ListFinder
+
+services:
+
+    virhi_rest_api_doctrine.repository.entity.finder:
+        class: %virhi_rest_api_doctrine.repository.entity.finder.class%
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager]
+
+    virhi_rest_api_doctrine.repository.entity.list_finder:
+        class: %virhi_rest_api_doctrine.repository.entity.list_finder.class%
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager]
+
+    virhi_rest_api_doctrine.repository.object.finder:
+        class: %virhi_rest_api_doctrine.repository.object.finder.class%
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager]
+
+    virhi_rest_api_doctrine.repository.object.list_finder:
+        class: %virhi_rest_api_doctrine.repository.object.list_finder.class%
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager]

@@ -9,9 +9,9 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Factory;
 
 use Virhi\RestApiDoctrineBundle\Api\Resources\SchemaResource;
-use Virhi\RestApiDoctrineBundle\Api\Context\Context;
-use Virhi\RestApiDoctrineBundle\Api\Context\SchemaContext;
-use Virhi\RestApiDoctrineBundle\Api\Context\TableContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\Context;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\SchemaContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\TableContext;
 
 class SchemaResourceFactory extends ResourceFactory implements ResourceFactoryInterface
 {
@@ -27,7 +27,7 @@ class SchemaResourceFactory extends ResourceFactory implements ResourceFactoryIn
 
         $tablesResource = array();
         foreach ($context->getTables() as $table) {
-            $tableContext    = new TableContext($table, $context->getRouter());
+            $tableContext = new TableContext($table, $context->getRouter());
             $tablesResource[] = TableResourceFactory::buildResource($tableContext);
         }
 

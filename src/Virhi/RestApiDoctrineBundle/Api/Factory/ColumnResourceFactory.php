@@ -9,8 +9,8 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Factory;
 
 use Virhi\RestApiDoctrineBundle\Api\Resources\ColumnRessource;
-use Virhi\RestApiDoctrineBundle\Api\Context\Context;
-use Virhi\RestApiDoctrineBundle\Api\Context\ColumnContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\Context;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\ColumnContext;
 
 class ColumnResourceFactory extends ResourceFactory implements ResourceFactoryInterface
 {

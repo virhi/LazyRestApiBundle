@@ -9,8 +9,8 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Factory;
 
 
-use Virhi\RestApiDoctrineBundle\Api\Context\Context;
-use Virhi\RestApiDoctrineBundle\Api\Context\EntityContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\Context;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\EntityContext;
 use Virhi\RestApiDoctrineBundle\Api\Resources\EntityRessource;
 
 class EntityResourceFactory extends ResourceFactory implements ResourceFactoryInterface

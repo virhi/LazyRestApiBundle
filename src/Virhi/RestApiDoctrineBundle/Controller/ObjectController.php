@@ -13,8 +13,11 @@ use Alterway\Bundle\RestHalBundle\Response\HalResponse;
 
 use Virhi\RestApiDoctrineBundle\Api\Factory\TableResourceFactory;
 use Virhi\RestApiDoctrineBundle\Api\Factory\SchemaResourceFactory;
-use Virhi\RestApiDoctrineBundle\Api\Context\TableContext;
-use Virhi\RestApiDoctrineBundle\Api\Context\SchemaContext;
+
+use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ListObjectContext;
+use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ObjectContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\TableContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\SchemaContext;
 
 class ObjectController extends Controller
 {
@@ -23,11 +26,12 @@ class ObjectController extends Controller
      */
     public function listObjectAction()
     {
-        $doctrine   = $this->get("doctrine");
-        $connection = $doctrine->getConnection();
-        $sm         = $connection->getSchemaManager();
+        $queryContext = new ListObjectContext();
+        $query = $this->get('virhi_rest_api_doctrine.query.object.list_object');
 
-        $context    = new SchemaContext($sm->listTables(), $this->get('router'));
+        $tables = $query->execute($queryContext);
+
+        $context    = new SchemaContext($tables, $this->get('router'));
         $resource   = SchemaResourceFactory::buildResource($context);
 
         $reponse    = new HalResponse($resource);
@@ -40,10 +44,10 @@ class ObjectController extends Controller
      */
     public function objectAction($name)
     {
-        $doctrine   = $this->get("doctrine");
-        $connection = $doctrine->getConnection();
-        $sm         = $connection->getSchemaManager();
-        $table      = $sm->listTableDetails($name);
+        $queryContext = new ObjectContext($name);
+        $query      = $this->get('virhi_rest_api_doctrine.query.object.object');
+        $table      = $query->execute($queryContext);
+
         $context    = new TableContext($table, $this->get('router') );
         $resource   = TableResourceFactory::buildResource($context);
 

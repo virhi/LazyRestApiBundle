@@ -6,7 +6,7 @@
  * Time: 23:48
  */
 
-namespace Virhi\RestApiDoctrineBundle\Api\Context;
+namespace Virhi\RestApiDoctrineBundle\Api\Resources\Context;
 
 use Symfony\Component\Routing\RouterInterface;
 

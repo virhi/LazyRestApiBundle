@@ -1,3 +1,7 @@
+imports:
+    - { resource: repositories.yml }
+    - { resource: queries.yml }
+
 parameters:
 #    virhi_rest_api_doctrine.example.class: Virhi\RestApiDoctrineBundle\Example
 

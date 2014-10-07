@@ -1,0 +1,24 @@
+parameters:
+    virhi_rest_api_doctrine.query.entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Query\Entity\EntityQuery
+    virhi_rest_api_doctrine.query.entity.list_entity.class: Virhi\RestApiDoctrineBundle\Api\Query\Entity\ListEntityQuery
+
+    virhi_rest_api_doctrine.query.object.object.class: Virhi\RestApiDoctrineBundle\Api\Query\Object\ObjectQuery
+    virhi_rest_api_doctrine.query.object.list_object.class: Virhi\RestApiDoctrineBundle\Api\Query\Object\ListObjectQuery
+
+services:
+
+    virhi_rest_api_doctrine.query.entity.entity:
+        class: %virhi_rest_api_doctrine.query.entity.entity.class%
+        arguments: [@virhi_rest_api_doctrine.repository.entity.finder]
+
+    virhi_rest_api_doctrine.query.entity.list_entity:
+        class: %virhi_rest_api_doctrine.query.entity.list_entity.class%
+        arguments: [@virhi_rest_api_doctrine.repository.entity.list_finder]
+
+    virhi_rest_api_doctrine.query.object.object:
+        class: %virhi_rest_api_doctrine.query.object.object.class%
+        arguments: [@virhi_rest_api_doctrine.repository.object.finder]
+
+    virhi_rest_api_doctrine.query.object.list_object:
+        class: %virhi_rest_api_doctrine.query.object.list_object.class%
+        arguments: [@virhi_rest_api_doctrine.repository.object.list_finder]

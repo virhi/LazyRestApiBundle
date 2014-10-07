@@ -8,8 +8,7 @@
 
 namespace Virhi\RestApiDoctrineBundle\Api\Factory;
 
-use Virhi\RestApiDoctrineBundle\Api\Context\Context;
-use Alterway\Bundle\RestHalBundle\ApiResource\Resource;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\Context;
 
 interface ResourceFactoryInterface
 {

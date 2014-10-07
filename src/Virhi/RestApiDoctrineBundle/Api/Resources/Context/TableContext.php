@@ -6,7 +6,7 @@
  * Time: 16:32
  */
 
-namespace Virhi\RestApiDoctrineBundle\Api\Context;
+namespace Virhi\RestApiDoctrineBundle\Api\Resources\Context;
 
 use Doctrine\DBAL\Schema\Table;
 use Symfony\Component\Routing\RouterInterface;
