@@ -16,12 +16,17 @@
         }
     },
     "require": {
-        "virhi/RestHalBundle": "@dev"
+        "virhi/RestHalBundle": "@dev",
+        "virhi/component": "@dev"
     },
     "repositories": [
         {
             "type": "git",
             "url": "https://github.com/virhi/RestHalBundle.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/virhi/Component.git"
         }
     ]
 }

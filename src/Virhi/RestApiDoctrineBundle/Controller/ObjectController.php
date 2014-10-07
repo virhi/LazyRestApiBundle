@@ -10,7 +10,6 @@ namespace Virhi\RestApiDoctrineBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Alterway\Bundle\RestHalBundle\Response\HalResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 use Virhi\RestApiDoctrineBundle\Api\Factory\TableResourceFactory;
 use Virhi\RestApiDoctrineBundle\Api\Factory\SchemaResourceFactory;

@@ -20,9 +20,7 @@ class EntityController extends Controller
 {
     public function listEntityAction($name)
     {
-        $doctrine = $this->get("doctrine");
-
-        $qb = $doctrine->getEntityManager('default')->createQueryBuilder();
+        $qb = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
         $qb->select('x')
             ->from('VirhiSymfonyDomainBundle:' .ucfirst($name), 'x');
 
@@ -36,9 +34,7 @@ class EntityController extends Controller
 
     public function entityAction($name, $id)
     {
-        $doctrine = $this->get("doctrine");
-
-        $qb = $doctrine->getEntityManager('default')->createQueryBuilder();
+        $qb = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
         $qb->select('x')
             ->from('VirhiSymfonyDomainBundle:' .ucfirst($name), 'x')
             ->where('x.id = :id')
