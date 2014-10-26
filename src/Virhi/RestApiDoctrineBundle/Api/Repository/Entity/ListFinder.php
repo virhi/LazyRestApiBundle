@@ -8,12 +8,12 @@
 
 namespace Virhi\RestApiDoctrineBundle\Api\Repository\Entity;
 
-use Virhi\Component\Repository\Repository;
+use Virhi\RestApiDoctrineBundle\Api\Repository\Repository as BaseRepository;
 use Virhi\Component\Repository\ListFinderInterface;
 use Virhi\Component\Search\SearchInterface;
 use Virhi\RestApiDoctrineBundle\Api\Search\ListEntitySearch;
 
-class ListFinder extends Repository implements ListFinderInterface
+class ListFinder extends BaseRepository implements ListFinderInterface
 {
     /**
      * @param SearchInterface $search
@@ -27,7 +27,7 @@ class ListFinder extends Repository implements ListFinderInterface
 
         $qb = $this->getEntiteManager()->createQueryBuilder();
         $qb->select('x')
-            ->from('VirhiSymfonyDomainBundle:' .ucfirst($search->getName()), 'x');
+            ->from($this->manager . ':' .ucfirst($search->getName()), 'x');
 
         $entitys = $qb->getQuery()->getArrayResult();
 

@@ -12,5 +12,18 @@ use Virhi\Component\Search\Search;
 
 class ListObjectSearch extends Search
 {
+    protected $onlyPrimary;
 
-} 
+    function __construct($onlyPrimary = true)
+    {
+        $this->onlyPrimary = $onlyPrimary;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOnlyPrimary()
+    {
+        return $this->onlyPrimary;
+    }
+}

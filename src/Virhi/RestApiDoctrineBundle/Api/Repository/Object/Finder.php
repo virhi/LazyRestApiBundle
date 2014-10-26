@@ -9,11 +9,11 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Repository\Object;
 
 use Virhi\Component\Repository\FinderInterface;
-use Virhi\Component\Repository\Repository;
+use Virhi\RestApiDoctrineBundle\Api\Repository\Repository as BaseRepository;
 use Virhi\Component\Search\SearchInterface;
 use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
 
-class Finder extends Repository implements FinderInterface
+class Finder extends BaseRepository implements FinderInterface
 {
     /**
      * @param SearchInterface $search

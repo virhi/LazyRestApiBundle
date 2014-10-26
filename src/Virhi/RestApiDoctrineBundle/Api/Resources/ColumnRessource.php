@@ -32,6 +32,8 @@ class ColumnRessource extends Resource
         $data['name'] = $this->column->getName();
         $data['type'] = $this->column->getType()->getName();
         $data['definition'] = $this->column->getColumnDefinition();
+        $data['notnull'] = $this->column->getNotnull();
+        $data['length'] = $this->column->getLength();
         $data['comment'] = $this->column->getComment();
         $data['auto_increment'] = $this->column->getAutoincrement();
 

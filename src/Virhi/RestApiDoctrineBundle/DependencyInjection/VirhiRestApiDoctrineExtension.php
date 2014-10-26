@@ -21,6 +21,7 @@ class VirhiRestApiDoctrineExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('virhi_rest_api_doctrine.manager', $config['manager']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

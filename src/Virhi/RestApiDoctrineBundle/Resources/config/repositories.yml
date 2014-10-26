@@ -9,16 +9,16 @@ services:
 
     virhi_rest_api_doctrine.repository.entity.finder:
         class: %virhi_rest_api_doctrine.repository.entity.finder.class%
-        arguments: [@doctrine, @doctrine.orm.default_entity_manager]
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager, %virhi_rest_api_doctrine.manager%]
 
     virhi_rest_api_doctrine.repository.entity.list_finder:
         class: %virhi_rest_api_doctrine.repository.entity.list_finder.class%
-        arguments: [@doctrine, @doctrine.orm.default_entity_manager]
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager, %virhi_rest_api_doctrine.manager%]
 
     virhi_rest_api_doctrine.repository.object.finder:
         class: %virhi_rest_api_doctrine.repository.object.finder.class%
-        arguments: [@doctrine, @doctrine.orm.default_entity_manager]
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager, %virhi_rest_api_doctrine.manager%]
 
     virhi_rest_api_doctrine.repository.object.list_finder:
         class: %virhi_rest_api_doctrine.repository.object.list_finder.class%
-        arguments: [@doctrine, @doctrine.orm.default_entity_manager]
+        arguments: [@doctrine, @doctrine.orm.default_entity_manager, %virhi_rest_api_doctrine.manager%]

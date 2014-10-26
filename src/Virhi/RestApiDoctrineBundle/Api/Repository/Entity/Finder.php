@@ -9,12 +9,12 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Repository\Entity;
 
 use Virhi\Component\Repository\FinderInterface;
-use Virhi\Component\Repository\Repository;
+use Virhi\RestApiDoctrineBundle\Api\Repository\Repository as BaseRepository;
 use Virhi\Component\Search\SearchInterface;
 use Virhi\RestApiDoctrineBundle\Api\Search\EntitySearch;
 use Doctrine\ORM\AbstractQuery;
 
-class Finder extends Repository implements FinderInterface
+class Finder extends BaseRepository implements FinderInterface
 {
     /**
      * @param SearchInterface $search
@@ -28,7 +28,7 @@ class Finder extends Repository implements FinderInterface
 
         $qb = $this->getEntiteManager()->createQueryBuilder();
         $qb->select('x')
-            ->from('VirhiSymfonyDomainBundle:' .ucfirst($search->getName()), 'x')
+            ->from($this->manager . ':' . ucfirst($search->getName()), 'x')
             ->where('x.id = :id')
             ->setParameter('id', $search->getId())
         ;
