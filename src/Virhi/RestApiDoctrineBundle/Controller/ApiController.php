@@ -31,8 +31,6 @@ class ApiController extends Controller
                 var_dump("columns : " . $column->getName() );
             }
         }
-
-        die;
     }
 
     public function entitInfoAction()

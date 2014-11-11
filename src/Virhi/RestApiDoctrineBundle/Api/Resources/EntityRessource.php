@@ -18,7 +18,7 @@ class EntityRessource extends Resource
      */
     protected $entity;
 
-    function __construct(RouterInterface $router, array $entity = array())
+    function __construct(RouterInterface $router, $entity)
     {
         parent::__construct($router);
         $this->entity = $entity;

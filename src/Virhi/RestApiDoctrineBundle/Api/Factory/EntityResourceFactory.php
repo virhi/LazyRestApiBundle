@@ -11,7 +11,7 @@ namespace Virhi\RestApiDoctrineBundle\Api\Factory;
 
 use Virhi\RestApiDoctrineBundle\Api\Resources\Context\Context;
 use Virhi\RestApiDoctrineBundle\Api\Resources\Context\EntityContext;
-use Virhi\RestApiDoctrineBundle\Api\Resources\EntityRessource;
+use Virhi\RestApiDoctrineBundle\Api\Resources\ObjectStructureRessource;
 
 class EntityResourceFactory extends ResourceFactory implements ResourceFactoryInterface
 {
@@ -25,7 +25,7 @@ class EntityResourceFactory extends ResourceFactory implements ResourceFactoryIn
             throw new \RuntimeException("Wrong context");
         }
 
-        $resource = new EntityRessource($context->getRouter(), $context->getEntity());
+        $resource = new ObjectStructureRessource($context->getRouter(), $context->getEntity());
         return $resource;
     }
 

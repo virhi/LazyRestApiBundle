@@ -13,6 +13,7 @@ use Virhi\RestApiDoctrineBundle\Api\Repository\Repository as BaseRepository;
 use Virhi\Component\Search\SearchInterface;
 use Virhi\RestApiDoctrineBundle\Api\Search\EntitySearch;
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\QueryBuilder;
 
 class Finder extends BaseRepository implements FinderInterface
 {
@@ -27,15 +28,43 @@ class Finder extends BaseRepository implements FinderInterface
         }
 
         $qb = $this->getEntiteManager()->createQueryBuilder();
+
         $qb->select('x')
             ->from($this->manager . ':' . ucfirst($search->getName()), 'x')
             ->where('x.id = :id')
             ->setParameter('id', $search->getId())
         ;
 
-        $entity  = $qb->getQuery()->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
+        foreach ($search->getJoins() as $index => $join) {
+            $alias = 'p'.$index;
+
+            $qb->addSelect($alias);
+            $qb->join('x.'.$join, $alias);
+        }
+
+
+        $query   = $qb->getQuery();
+        $entity  = $query->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
 
         return $entity;
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param EntitySearch $search
+     * @return \Doctrine\ORM\Query
+     */
+    public function getQuery(QueryBuilder $qb, EntitySearch $search)
+    {
+        $qb->select('x')
+            ->addSelect('p')
+            ->from($this->manager . ':' . ucfirst($search->getName()), 'x')
+            ->join('x.tags', 'p')
+            ->where('x.id = :id')
+            ->setParameter('id', $search->getId())
+        ;
+
+        return $qb->getQuery();
     }
 
 } 

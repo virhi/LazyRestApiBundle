@@ -10,6 +10,7 @@ namespace Virhi\RestApiDoctrineBundle\Api\Query\Context\Entity;
 
 
 use Virhi\Component\Query\Context\ContextInterface;
+use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
 
 class EntityContext implements ContextInterface
 {
@@ -17,10 +18,16 @@ class EntityContext implements ContextInterface
 
     protected $id;
 
-    function __construct($id, $name)
+    /**
+     * @var ObjectStructure
+     */
+    protected $objectStructure;
+
+    function __construct($id, $name, ObjectStructure $objectStructure)
     {
         $this->id   = $id;
         $this->name = $name;
+        $this->objectStructure = $objectStructure;
     }
 
     /**
@@ -39,6 +46,12 @@ class EntityContext implements ContextInterface
         return $this->name;
     }
 
+    /**
+     * @return ObjectStructure
+     */
+    public function getObjectStructure()
+    {
+        return $this->objectStructure;
+    }
 
-
-} 
+}

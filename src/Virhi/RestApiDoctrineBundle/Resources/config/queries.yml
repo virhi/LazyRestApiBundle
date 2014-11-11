@@ -17,7 +17,7 @@ services:
 
     virhi_rest_api_doctrine.query.object.object:
         class: %virhi_rest_api_doctrine.query.object.object.class%
-        arguments: [@virhi_rest_api_doctrine.repository.object.finder]
+        arguments: [@virhi_rest_api_doctrine.service.object, @virhi_rest_api_doctrine.service.entity_namespace]
 
     virhi_rest_api_doctrine.query.object.list_object:
         class: %virhi_rest_api_doctrine.query.object.list_object.class%

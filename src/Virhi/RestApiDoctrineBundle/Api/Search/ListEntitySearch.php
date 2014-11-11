@@ -14,9 +14,12 @@ class ListEntitySearch extends Search
 {
     protected $name;
 
-    function __construct($name)
+    protected $joins;
+
+    function __construct($name, array $joins = array())
     {
-        $this->name = $name;
+        $this->name  = $name;
+        $this->joins = $joins;
     }
 
     /**
@@ -25,6 +28,14 @@ class ListEntitySearch extends Search
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getJoins()
+    {
+        return $this->joins;
     }
 
 

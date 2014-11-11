@@ -13,6 +13,7 @@ use Virhi\Component\Query\QueryInterface;
 use Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder;
 use Virhi\RestApiDoctrineBundle\Api\Search\EntitySearch;
 use Virhi\RestApiDoctrineBundle\Api\Query\Context\Entity\EntityContext;
+use Virhi\RestApiDoctrineBundle\Api\Factory\EntityFactory;
 
 class EntityQuery implements  QueryInterface
 {
@@ -33,9 +34,17 @@ class EntityQuery implements  QueryInterface
             throw new \RuntimeException();
         }
 
-        $search = new EntitySearch($context->getId(), $context->getName());
+        $joins = array();
 
-        return $this->finder->find($search);
+        foreach ($context->getObjectStructure()->getEmbeded() as $embed) {
+            $joins[] = $embed->getFieldName();
+        }
+
+        $search = new EntitySearch($context->getId(), $context->getName(), $joins);
+        $entity = $this->finder->find($search);
+        EntityFactory::build($context->getObjectStructure(), $entity);
+
+        return $context->getObjectStructure();
     }
 
 } 

@@ -17,7 +17,11 @@ use Virhi\RestApiDoctrineBundle\Api\Factory\SchemaResourceFactory;
 use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ListObjectContext;
 use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ObjectContext;
 use Virhi\RestApiDoctrineBundle\Api\Resources\Context\TableContext;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\ObjectStructureContext;
 use Virhi\RestApiDoctrineBundle\Api\Resources\Context\SchemaContext;
+
+use Virhi\RestApiDoctrineBundle\Api\Resources\ObjectStructureRessource;
+use Virhi\RestApiDoctrineBundle\Api\Resources\ListObjectStructureRessource;
 
 class ObjectController extends Controller
 {
@@ -26,15 +30,12 @@ class ObjectController extends Controller
      */
     public function listObjectAction()
     {
-        $queryContext = new ListObjectContext();
-        $query = $this->get('virhi_rest_api_doctrine.query.object.list_object');
+        $queryContext     = new ListObjectContext();
+        $query            = $this->get('virhi_rest_api_doctrine.query.object.list_object');
+        $objectStructures = $query->execute($queryContext);
 
-        $tables = $query->execute($queryContext);
-
-        $context    = new SchemaContext($tables, $this->get('router'));
-        $resource   = SchemaResourceFactory::buildResource($context);
-
-        $reponse    = new HalResponse($resource);
+        $resource         = new ListObjectStructureRessource($this->get('router'), $objectStructures);
+        $reponse          = new HalResponse($resource);
         return $reponse;
     }
 
@@ -44,13 +45,12 @@ class ObjectController extends Controller
      */
     public function objectAction($name)
     {
-        $queryContext = new ObjectContext($name);
-        $query      = $this->get('virhi_rest_api_doctrine.query.object.object');
-        $table      = $query->execute($queryContext);
+        $queryContext    = new ObjectContext($name);
+        $query           = $this->get('virhi_rest_api_doctrine.query.object.object');
+        $objectStructure = $query->execute($queryContext);
 
-        $context    = new TableContext($table, $this->get('router') );
-        $resource   = TableResourceFactory::buildResource($context);
 
+        $resource   = new ObjectStructureRessource($this->get('router'), $objectStructure);
         $reponse    = new HalResponse($resource);
         return $reponse;
     }

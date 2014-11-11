@@ -9,14 +9,21 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Query\Context\Entity;
 
 use Virhi\Component\Query\Context\ContextInterface;
+use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
 
 class ListEntityContext implements ContextInterface
 {
     protected $name;
 
-    function __construct($name)
+    /**
+     * @var ObjectStructure
+     */
+    protected $objectStructure;
+
+    function __construct($name, ObjectStructure $objectStructure)
     {
         $this->name = $name;
+        $this->objectStructure = $objectStructure;
     }
 
     /**
@@ -27,4 +34,11 @@ class ListEntityContext implements ContextInterface
         return $this->name;
     }
 
+    /**
+     * @return ObjectStructure
+     */
+    public function getObjectStructure()
+    {
+        return $this->objectStructure;
+    }
 }

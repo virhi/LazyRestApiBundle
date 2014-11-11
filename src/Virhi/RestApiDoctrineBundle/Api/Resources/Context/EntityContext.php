@@ -27,5 +27,4 @@ class EntityContext extends Context
     {
         return $this->entity;
     }
-
 } 

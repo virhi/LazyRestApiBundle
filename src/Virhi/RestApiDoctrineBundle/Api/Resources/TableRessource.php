@@ -34,9 +34,13 @@ class TableRessource extends Resource
 
     protected function prepare()
     {
+
         $data = array();
-        $data['name']        = $this->table->getName();
-        $data['primary_key'] = $this->table->getPrimaryKey()->getName();
+        $data['name'] = $this->table->getName();
+
+        foreach ($this->table->getPrimaryKey()->getColumns() as $index => $collumn) {
+            $data['primary_key'][] = $collumn;
+        }
 
         foreach ($this->collumns as $collumn) {
             $this->addResource('collumns', $collumn);

@@ -13,6 +13,7 @@ use Virhi\Component\Query\Context\ContextInterface;
 use Virhi\Component\Query\QueryInterface;
 use Virhi\RestApiDoctrineBundle\Api\Repository\Entity\ListFinder;
 use Virhi\RestApiDoctrineBundle\Api\Search\ListEntitySearch;
+use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
 
 class ListEntityQuery implements  QueryInterface
 {
@@ -29,13 +30,45 @@ class ListEntityQuery implements  QueryInterface
 
     public function execute(ContextInterface $context)
     {
+        $result = null;
         if (!$context instanceof ListEntityContext) {
             throw new \RuntimeException();
         }
 
-        $search = new ListEntitySearch($context->getName());
+        $joins = array();
 
-        return $this->listFinder->find($search);
+        foreach ($context->getObjectStructure()->getEmbeded() as $embed) {
+            $joins[] = $embed->getFieldName();
+        }
+
+        $search  = new ListEntitySearch($context->getName(), $joins);
+        $entitys = $this->listFinder->find($search);
+
+
+        $name      = $context->getObjectStructure()->getName();
+        $namespace = $context->getObjectStructure()->getNamespace();
+
+        foreach($entitys as $entity) {
+            $objectStructure = new ObjectStructure($name, $namespace);
+            foreach ($context->getObjectStructure()->getFields() as $field) {
+                $tmpField = clone $field;
+                if (array_key_exists($field->getName(), $entity)) {
+                    $tmpField->setValue($entity[$field->getName()]);
+                }
+                $objectStructure->addField($tmpField);
+            }
+
+            foreach ($context->getObjectStructure()->getEmbeded() as $embed) {
+                $tembed = clone $embed;
+                foreach ($entity[$embed->getFieldName()] as $tmpEmbedField) {
+                    $tembed->setValue($tmpEmbedField);
+                    $objectStructure->addEmbeded($tembed);
+                }
+            }
+            $result[] = $objectStructure;
+        }
+
+        return $result;
     }
 
 } 

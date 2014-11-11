@@ -21,3 +21,13 @@ virhi_rest_api_doctrine_list_entity:
 virhi_rest_api_doctrine_entity:
     path:     /api/entity/{name}/{id}
     defaults: { _controller: VirhiRestApiDoctrineBundle:Entity:entity }
+
+virhi_rest_api_doctrine_entity_create:
+    methods: POST
+    path:     /api/create/{name}
+    defaults: { _controller: VirhiRestApiDoctrineBundle:WriteEntity:create }
+
+virhi_rest_api_doctrine_entity_update:
+    methods: PUT
+    path:     /api/update/{name}
+    defaults: { _controller: VirhiRestApiDoctrineBundle:WriteEntity:create }

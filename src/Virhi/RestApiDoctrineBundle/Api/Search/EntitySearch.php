@@ -17,10 +17,13 @@ class EntitySearch extends Search
 
     protected $id;
 
-    function __construct($id, $name)
+    protected $joins;
+
+    function __construct($id, $name, array $joins)
     {
         $this->id   = $id;
         $this->name = $name;
+        $this->joins = $joins;
     }
 
     /**
@@ -38,4 +41,13 @@ class EntitySearch extends Search
     {
         return $this->name;
     }
+
+    /**
+     * @return array
+     */
+    public function getJoins()
+    {
+        return $this->joins;
+    }
+
 }

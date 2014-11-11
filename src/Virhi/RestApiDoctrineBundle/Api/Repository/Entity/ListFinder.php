@@ -29,6 +29,13 @@ class ListFinder extends BaseRepository implements ListFinderInterface
         $qb->select('x')
             ->from($this->manager . ':' .ucfirst($search->getName()), 'x');
 
+        foreach ($search->getJoins() as $index => $join) {
+            $alias = 'p'.$index;
+
+            $qb->addSelect($alias);
+            $qb->join('x.'.$join, $alias);
+        }
+
         $entitys = $qb->getQuery()->getArrayResult();
 
         return $entitys;

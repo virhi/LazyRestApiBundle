@@ -8,24 +8,26 @@
 
 namespace Virhi\RestApiDoctrineBundle\Api\Query\Object;
 
-
 use Virhi\Component\Query\Context\ContextInterface;
 use Virhi\Component\Query\QueryInterface;
-
 use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ObjectContext;
-use Virhi\RestApiDoctrineBundle\Api\Repository\Object\Finder;
+use Virhi\RestApiDoctrineBundle\Api\Service\ObjectService;
+use Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService;
 use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
 
 class ObjectQuery implements QueryInterface
 {
     /**
-     * @var Finder
+     * @var ObjectService
      */
-    protected $finder;
+    protected $objectService;
 
-    function __construct(Finder $finder)
+    protected $entityNamespaceService;
+
+    function __construct(ObjectService $objectService, EntityNamespaceService $entityNamespaceService)
     {
-        $this->finder = $finder;
+        $this->objectService = $objectService;
+        $this->entityNamespaceService = $entityNamespaceService;
     }
 
 
@@ -35,8 +37,7 @@ class ObjectQuery implements QueryInterface
             throw new \RuntimeException();
         }
 
-        $search = new ObjectSearch($context->getName());
-        return $this->finder->find($search);
+        $search = new ObjectSearch($context->getName(), $this->entityNamespaceService->getEntityFullName($context->getName()));
+        return $this->objectService->getObjectStructure($search);
     }
-
 } 

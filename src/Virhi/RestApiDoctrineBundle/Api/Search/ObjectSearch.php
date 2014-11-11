@@ -18,9 +18,12 @@ class ObjectSearch extends Search
      */
     protected $name;
 
-    function __construct($name)
+    protected $namespace;
+
+    function __construct($name, $namespace)
     {
         $this->name = $name;
+        $this->namespace = $namespace;
     }
 
     /**
@@ -31,4 +34,12 @@ class ObjectSearch extends Search
         return $this->name;
     }
 
-} 
+    /**
+     * @return mixed
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+}
