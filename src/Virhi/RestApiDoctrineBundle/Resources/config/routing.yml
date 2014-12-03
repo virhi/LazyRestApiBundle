@@ -29,5 +29,5 @@ virhi_rest_api_doctrine_entity_create:
 
 virhi_rest_api_doctrine_entity_update:
     methods: PUT
-    path:     /api/update/{name}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:WriteEntity:create }
+    path:     /api/update/{name}/{id}
+    defaults: { _controller: VirhiRestApiDoctrineBundle:WriteEntity:update }

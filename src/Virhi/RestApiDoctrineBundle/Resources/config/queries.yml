@@ -9,16 +9,24 @@ services:
 
     virhi_rest_api_doctrine.query.entity.entity:
         class: %virhi_rest_api_doctrine.query.entity.entity.class%
-        arguments: [@virhi_rest_api_doctrine.repository.entity.finder]
+        arguments:
+            - @virhi_rest_api_doctrine.service.entity
+            - @virhi_rest_api_doctrine.transformer.contexttosearch.entity.entity
 
     virhi_rest_api_doctrine.query.entity.list_entity:
         class: %virhi_rest_api_doctrine.query.entity.list_entity.class%
-        arguments: [@virhi_rest_api_doctrine.repository.entity.list_finder]
+        arguments:
+            - @virhi_rest_api_doctrine.service.entity
+            - @virhi_rest_api_doctrine.transformer.contexttosearch.entity.list_entity
 
     virhi_rest_api_doctrine.query.object.object:
         class: %virhi_rest_api_doctrine.query.object.object.class%
-        arguments: [@virhi_rest_api_doctrine.service.object, @virhi_rest_api_doctrine.service.entity_namespace]
+        arguments:
+            - @virhi_rest_api_doctrine.service.object
+            - @virhi_rest_api_doctrine.transformer.contexttosearch.object.object
 
     virhi_rest_api_doctrine.query.object.list_object:
         class: %virhi_rest_api_doctrine.query.object.list_object.class%
-        arguments: [@virhi_rest_api_doctrine.repository.object.list_finder]
+        arguments:
+            - @virhi_rest_api_doctrine.service.object
+            - @virhi_rest_api_doctrine.transformer.contexttosearch.object.list_object

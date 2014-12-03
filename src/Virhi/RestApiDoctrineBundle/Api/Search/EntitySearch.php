@@ -15,15 +15,21 @@ class EntitySearch extends Search
 {
     protected $name;
 
+    protected $namespace;
+
     protected $id;
 
     protected $joins;
 
-    function __construct($id, $name, array $joins)
+    protected $identifier;
+
+    function __construct($id, $name, $namespace,  array $joins, array $identifier)
     {
-        $this->id   = $id;
-        $this->name = $name;
-        $this->joins = $joins;
+        $this->id         = $id;
+        $this->name       = $name;
+        $this->joins      = $joins;
+        $this->namespace  = $namespace;
+        $this->identifier = $identifier;
     }
 
     /**
@@ -48,6 +54,22 @@ class EntitySearch extends Search
     public function getJoins()
     {
         return $this->joins;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 
 }

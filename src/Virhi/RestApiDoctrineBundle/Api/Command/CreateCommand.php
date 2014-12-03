@@ -16,6 +16,7 @@ use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
 use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
 use Virhi\RestApiDoctrineBundle\Api\Service\ObjectService;
 use Doctrine\DBAL\Schema\Table;
+use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
 
 class CreateCommand implements CommandInterface
 {
@@ -36,9 +37,9 @@ class CreateCommand implements CommandInterface
 
     function __construct(AttacherInterface $attacher, EntityNamespaceService $entityNamespaceService, ObjectService $objectService)
     {
-        $this->attacher = $attacher;
+        $this->attacher               = $attacher;
         $this->entityNamespaceService = $entityNamespaceService;
-        $this->objectService = $objectService;
+        $this->objectService          = $objectService;
     }
 
 
@@ -49,7 +50,7 @@ class CreateCommand implements CommandInterface
         }
 
         $entityFullName = $this->entityNamespaceService->getEntityFullName($context->getName());
-        $entity = new $entityFullName();
+        $entity    = new $entityFullName();
 
         $search    = new ObjectSearch($context->getName(), $entityFullName);
         $structure = $this->objectService->getObjectStructure($search);
@@ -58,18 +59,14 @@ class CreateCommand implements CommandInterface
         $this->attacher->attach($entity);
     }
 
-    protected function populEntity(Table $table, $entity, $inputEntity)
+    protected function populEntity(ObjectStructure $table, $entity, $inputEntity)
     {
-
         foreach (get_object_vars($inputEntity) as $varName => $value) {
-            if ($table->hasColumn($varName)){
+            if ($table->hasField($varName)){
                 $entity->{'set'. ucfirst($varName)}($value);
             } else {
                 throw new \RuntimeException('the property : ' . $varName . ' dos not exist for entity : ' . get_class($entity));
             }
         }
-
-        var_dump($entity);
-        die;
     }
 } 

@@ -8,6 +8,7 @@
 
 namespace Virhi\RestApiDoctrineBundle\Api\Factory;
 
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Schema\Table;
@@ -17,10 +18,9 @@ use Virhi\RestApiDoctrineBundle\Api\ValueObject\Embed;
 
 class ObjectStructureFactory 
 {
-    static public function build(EntityManager $em, ClassMetadata $metadata, Table $table)
+    static public function buildObjectStructure(RegistryInterface $doctrine, ClassMetadata $metadata, Table $table, $entity = array())
     {
         $structure = new ObjectStructure($metadata->getName(), $metadata->namespace);
-
         $structure->setIdentifier($metadata->getIdentifier());
 
         foreach ($metadata->fieldMappings as $rawField) {
@@ -35,21 +35,49 @@ class ObjectStructureFactory
             $field->setDefinition($column->getColumnDefinition());
             $field->setNotnull($column->getNotnull());
 
+            if (array_key_exists($rawField['fieldName'], $entity)) {
+                $field->setValue($entity[$rawField['fieldName']]);
+            }
+
             $structure->addField($field);
         }
 
         foreach ($metadata->getAssociationMappings() as $mapping)
         {
-            $tmpMetadata = $em->getClassMetadata($mapping['targetEntity']);
+            $namespace     = $mapping['targetEntity'];
+            $entityInfo    = explode('\\', $namespace);
+            $entityName    = end($entityInfo);
 
-            $embed = new Embed();
-            $embed->setEntityName($mapping['targetEntity']);
-            $embed->setFieldName($mapping['fieldName']);
-            $embed->setIdentifiers($tmpMetadata->identifier);
+            $tableEmbed    = self::getTables($doctrine, strtolower($entityName));
+            $metadataEmbed = self::getEntityMetadata($doctrine, $namespace);
+            $listEmbedObjectStructure = array();
 
+            if (array_key_exists($mapping['fieldName'], $entity)) {
+                $embedEntities = $entity[$mapping['fieldName']];
+                foreach ($embedEntities as $embedEntity ) {
+                    $listEmbedObjectStructure[] = self::buildObjectStructure($doctrine, $metadataEmbed, $tableEmbed, $embedEntity);
+                }
+            }
+
+            $embed = new Embed($mapping['fieldName'], $listEmbedObjectStructure);
             $structure->addEmbeded($embed);
         }
 
         return $structure;
+    }
+
+    static public function getTables(RegistryInterface $doctrine, $name)
+    {
+        $doctrine   = clone $doctrine;
+        $connection = $doctrine->getConnection();
+        $sm         = $connection->getSchemaManager();
+
+        return $sm->listTableDetails($name);
+    }
+
+    static public function getEntityMetadata(RegistryInterface $doctrine, $namespace)
+    {
+        $doctrine   = clone $doctrine;
+        return $doctrine->getEntityManager()->getClassMetadata($namespace);
     }
 }

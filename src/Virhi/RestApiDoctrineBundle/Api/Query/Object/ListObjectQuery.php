@@ -11,31 +11,30 @@ namespace Virhi\RestApiDoctrineBundle\Api\Query\Object;
 
 use Virhi\Component\Query\Context\ContextInterface;
 use Virhi\Component\Query\QueryInterface;
-
-use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ListObjectContext;
-use Virhi\RestApiDoctrineBundle\Api\Repository\Object\ListFinder;
-use Virhi\RestApiDoctrineBundle\Api\Search\ListObjectSearch;
+use Virhi\Component\Transformer\TransformerInterface;
+use Virhi\RestApiDoctrineBundle\Api\Service\ObjectService;
 
 class ListObjectQuery implements QueryInterface
 {
     /**
-     * @var ListFinder
+     * @var ObjectService
      */
-    protected $listFinder;
+    protected $service;
 
-    function __construct(ListFinder $listFinder)
+    /**
+     * @var TransformerInterface
+     */
+    protected $transformer;
+
+    function __construct(ObjectService $service, TransformerInterface $transformer)
     {
-        $this->listFinder = $listFinder;
+        $this->service     = $service;
+        $this->transformer = $transformer;
     }
 
 
     public function execute(ContextInterface $context)
     {
-        if (!$context instanceof ListObjectContext) {
-            throw new \RuntimeException();
-        }
-
-        $search = new ListObjectSearch();
-        return $this->listFinder->find($search);
+        return $this->service->getListObjectStructure($this->transformer->transform($context));
     }
 } 

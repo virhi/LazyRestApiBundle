@@ -2,10 +2,12 @@ imports:
     - { resource: repositories.yml }
     - { resource: queries.yml }
     - { resource: commands.yml }
+    - { resource: transformers.yml }
 
 parameters:
     virhi_rest_api_doctrine.service.entity_namespace.class: Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService
     virhi_rest_api_doctrine.service.object.class: Virhi\RestApiDoctrineBundle\Api\Service\ObjectService
+    virhi_rest_api_doctrine.service.entity.class: Virhi\RestApiDoctrineBundle\Api\Service\EntityService
 
 services:
     virhi_rest_api_doctrine.service.entity_namespace:
@@ -14,4 +16,12 @@ services:
 
     virhi_rest_api_doctrine.service.object:
         class: %virhi_rest_api_doctrine.service.object.class%
-        arguments: [@virhi_rest_api_doctrine.repository.object.finder]
+        arguments:
+            - @virhi_rest_api_doctrine.repository.object.finder
+            - @virhi_rest_api_doctrine.repository.object.list_finder
+
+    virhi_rest_api_doctrine.service.entity:
+        class: %virhi_rest_api_doctrine.service.entity.class%
+        arguments:
+            - @virhi_rest_api_doctrine.repository.entity.finder
+            - @virhi_rest_api_doctrine.repository.entity.list_finder

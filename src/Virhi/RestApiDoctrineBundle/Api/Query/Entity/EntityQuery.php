@@ -9,42 +9,32 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Query\Entity;
 
 use Virhi\Component\Query\Context\ContextInterface;
+use Virhi\Component\Transformer\TransformerInterface;
 use Virhi\Component\Query\QueryInterface;
-use Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder;
-use Virhi\RestApiDoctrineBundle\Api\Search\EntitySearch;
-use Virhi\RestApiDoctrineBundle\Api\Query\Context\Entity\EntityContext;
-use Virhi\RestApiDoctrineBundle\Api\Factory\EntityFactory;
+use Virhi\RestApiDoctrineBundle\Api\Service\EntityService;
+
 
 class EntityQuery implements  QueryInterface
 {
     /**
-     * @var Finder
+     * @var EntityService
      */
-    protected $finder;
+    protected $service;
 
-    function __construct(Finder $finder)
+    /**
+     * @var TransformerInterface
+     */
+    protected $transformer;
+
+    function __construct(EntityService $service, TransformerInterface $transformer)
     {
-        $this->finder = $finder;
+        $this->service = $service;
+        $this->transformer = $transformer;
     }
-
 
     public function execute(ContextInterface $context)
     {
-        if (!$context instanceof EntityContext) {
-            throw new \RuntimeException();
-        }
-
-        $joins = array();
-
-        foreach ($context->getObjectStructure()->getEmbeded() as $embed) {
-            $joins[] = $embed->getFieldName();
-        }
-
-        $search = new EntitySearch($context->getId(), $context->getName(), $joins);
-        $entity = $this->finder->find($search);
-        EntityFactory::build($context->getObjectStructure(), $entity);
-
-        return $context->getObjectStructure();
+        return $this->service->find($this->transformer->transform($context));
     }
 
 } 

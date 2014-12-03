@@ -31,10 +31,45 @@ class ObjectStructureRessource extends Resource
     {
         $data = array();
 
-        $data['name'] = $this->objectStructure->getName();
+        $data['name']       = $this->objectStructure->getName();
         $data['identifier'] = $this->objectStructure->getIdentifier();
+        $data['fields']     = $this->buildFields($this->objectStructure->getFields());
+        $data['embeds']     = $this->buildEmbed($this->objectStructure->getEmbeded());
 
-        foreach ($this->objectStructure->getFields() as $field) {
+        $this->setData($data);
+    }
+
+    protected function buildEmbed($embeds)
+    {
+        $result = array();
+        foreach ($embeds as $embed) {
+
+            foreach ($embed as $embeded) {
+                if ($embeded instanceof Embed) {
+
+                    $tmpEmbed = array();
+                    $tmpEmbed['fieldName'] = $embeded->getFieldName();
+                    $entities = array();
+
+                    foreach ($embeded->getListObjectStructure() as $index => $objectStructure) {
+                        $entities[$index]['name']       = $objectStructure->getName();
+                        $entities[$index]['identifier'] = $objectStructure->getIdentifier();
+                        $entities[$index]['fields']     = $this->buildFields($objectStructure->getFields());
+                        $entities[$index]['embeds']     = $this->buildEmbed($objectStructure->getEmbeded());
+                    }
+
+                    $tmpEmbed['entities']  = $entities;
+                    $result[$embeded->getFieldName()][] = $tmpEmbed;
+                }
+            }
+        }
+        return $result;
+    }
+
+    protected function buildFields($fields)
+    {
+        $result = array();
+        foreach ($fields as $field) {
             if ($field instanceof Field) {
                 $tmpField = array();
                 $tmpField['name']           = $field->getName();
@@ -45,23 +80,10 @@ class ObjectStructureRessource extends Resource
                 $tmpField['length']         = $field->getLength();
                 $tmpField['comment']        = $field->getComment();
                 $tmpField['auto_increment'] = $field->getAutoIncrement();
-                $data['fields'][] = $tmpField;
+                $result[] = $tmpField;
             }
         }
-
-        foreach ($this->objectStructure->getEmbeded() as $embed) {
-            if ($embed instanceof Embed) {
-                $tmpEmbed = array();
-                $tmpEmbed['name']       = $embed->getEntityName();
-                $tmpEmbed['fieldName']  = $embed->getFieldName();
-                $tmpEmbed['identifier'] = $embed->getIdentifiers();
-                $tmpEmbed['value']      = $embed->getValue();
-
-                $data['embeds'][$embed->getFieldName()][] = $tmpEmbed;
-            }
-        }
-
-        $this->setData($data);
+        return $result;
     }
 
     protected function generateUri()

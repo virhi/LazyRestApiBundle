@@ -2,18 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: virhi
- * Date: 29/10/2014
- * Time: 00:12
+ * Date: 03/12/2014
+ * Time: 21:03
  */
 
 namespace Virhi\RestApiDoctrineBundle\Api\Service;
 
-use Virhi\RestApiDoctrineBundle\Api\Repository\Object\Finder;
-use Virhi\RestApiDoctrineBundle\Api\Repository\Object\ListFinder;
-use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
-use Virhi\RestApiDoctrineBundle\Api\Search\ListObjectSearch;
+use Virhi\Component\Search\SearchInterface;
+use Virhi\Component\Repository\FinderInterface;
+use Virhi\Component\Repository\ListFinderInterface;
 
-class ObjectService 
+use Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder;
+use Virhi\RestApiDoctrineBundle\Api\Repository\Entity\ListFinder;
+
+class EntityService 
 {
     /**
      * @var Finder
@@ -26,18 +28,20 @@ class ObjectService
     protected $listFinder;
 
 
+
     function __construct(Finder $finder, ListFinder $listFinder)
     {
-        $this->finder = $finder;
+        $this->finder     = $finder;
         $this->listFinder = $listFinder;
     }
 
-    public function getObjectStructure(ObjectSearch $search)
+
+    public function find(SearchInterface $search)
     {
         return $this->finder->find($search);
     }
 
-    public function getListObjectStructure(ListObjectSearch $search)
+    public function findList(SearchInterface $search)
     {
         return $this->listFinder->find($search);
     }

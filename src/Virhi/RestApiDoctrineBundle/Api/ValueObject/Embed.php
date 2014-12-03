@@ -11,44 +11,15 @@ namespace Virhi\RestApiDoctrineBundle\Api\ValueObject;
 
 class Embed 
 {
-    protected $entityName;
-
     protected $fieldName;
 
-    protected $identifiers;
+    protected $listObjectStructure;
 
-    protected $value;
-
-    /**
-     * @return mixed
-     */
-    public function getValue()
+    function __construct($fieldName, array $listObjectStructure = array())
     {
-        return $this->value;
-    }
-
-    /**
-     * @param mixed $value
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEntityName()
-    {
-        return $this->entityName;
-    }
-
-    /**
-     * @param mixed $entityName
-     */
-    public function setEntityName($entityName)
-    {
-        $this->entityName = $entityName;
+        $this->fieldName            = $fieldName;
+        $this->listObjectStructure = new \ArrayObject();
+        $this->addObjectStructure($listObjectStructure);
     }
 
     /**
@@ -59,28 +30,19 @@ class Embed
         return $this->fieldName;
     }
 
-    /**
-     * @param mixed $fieldName
-     */
-    public function setFieldName($fieldName)
+    protected function addObjectStructure($listObjectStructure)
     {
-        $this->fieldName = $fieldName;
+        foreach ($listObjectStructure as $index => $objectStructure) {
+            $this->listObjectStructure->offsetSet($index, $objectStructure);
+        }
     }
 
     /**
-     * @return mixed
+     * @return \ArrayObject
      */
-    public function getIdentifiers()
+    public function getListObjectStructure()
     {
-        return $this->identifiers;
-    }
-
-    /**
-     * @param mixed $identifiers
-     */
-    public function setIdentifiers($identifiers)
-    {
-        $this->identifiers = $identifiers;
+        return $this->listObjectStructure;
     }
 
 }

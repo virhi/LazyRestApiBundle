@@ -39,7 +39,7 @@ class ListFinder extends BaseRepository implements ListFinderInterface
      */
     public function find(SearchInterface $search)
     {
-        $result     = array();
+        $result = array();
 
         if (!$search instanceof ListObjectSearch) {
             throw new \RuntimeException();
@@ -51,7 +51,7 @@ class ListFinder extends BaseRepository implements ListFinderInterface
         foreach ($metadatas as $tmpMetadata) {
             $metadata       = $this->getDoctrine()->getEntityManager()->getClassMetadata($tmpMetadata->getName());
             $table          = $this->getTable($tmpMetadata->table["name"]);
-            $objStructure   = ObjectStructureFactory::build($em, $metadata, $table);
+            $objStructure   = ObjectStructureFactory::buildObjectStructure($this->getDoctrine(), $metadata, $table);
             $result[]       = $objStructure;
         }
 

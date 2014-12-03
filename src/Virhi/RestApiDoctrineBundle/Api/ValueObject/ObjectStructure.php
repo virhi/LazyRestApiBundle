@@ -44,14 +44,25 @@ class ObjectStructure
     }
 
 
-    public function addField($field)
+    public function addField(Field $field)
     {
-        $this->fields->append($field);
+        $this->fields->offsetSet($field->getName(), $field);
     }
 
-    public function addEmbeded($embeded)
+    public function hasField($field)
     {
-        $this->embeded->append($embeded);
+        return $this->fields->offsetExists($field);
+    }
+
+    public function addEmbeded(Embed $embeded)
+    {
+        $list = new \ArrayObject();
+        if ($this->embeded->offsetExists($embeded->getFieldName())) {
+            $list = $this->embeded->offsetGet($embeded->getFieldName());
+        }
+
+        $list->append($embeded);
+        $this->embeded->offsetSet($embeded->getFieldName(), $list);
     }
 
     /**

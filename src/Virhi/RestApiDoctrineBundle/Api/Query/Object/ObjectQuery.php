@@ -10,10 +10,8 @@ namespace Virhi\RestApiDoctrineBundle\Api\Query\Object;
 
 use Virhi\Component\Query\Context\ContextInterface;
 use Virhi\Component\Query\QueryInterface;
-use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ObjectContext;
+use Virhi\Component\Transformer\TransformerInterface;
 use Virhi\RestApiDoctrineBundle\Api\Service\ObjectService;
-use Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService;
-use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
 
 class ObjectQuery implements QueryInterface
 {
@@ -22,22 +20,21 @@ class ObjectQuery implements QueryInterface
      */
     protected $objectService;
 
-    protected $entityNamespaceService;
+    /**
+     * @var TransformerInterface
+     */
+    protected $transformer;
 
-    function __construct(ObjectService $objectService, EntityNamespaceService $entityNamespaceService)
+
+    function __construct(ObjectService $objectService, TransformerInterface $transformer)
     {
         $this->objectService = $objectService;
-        $this->entityNamespaceService = $entityNamespaceService;
+        $this->transformer = $transformer;
     }
 
 
     public function execute(ContextInterface $context)
     {
-        if (!$context instanceof ObjectContext) {
-            throw new \RuntimeException();
-        }
-
-        $search = new ObjectSearch($context->getName(), $this->entityNamespaceService->getEntityFullName($context->getName()));
-        return $this->objectService->getObjectStructure($search);
+        return $this->objectService->getObjectStructure($this->transformer->transform($context));
     }
 } 

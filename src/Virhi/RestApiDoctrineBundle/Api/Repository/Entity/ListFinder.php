@@ -12,6 +12,7 @@ use Virhi\RestApiDoctrineBundle\Api\Repository\Repository as BaseRepository;
 use Virhi\Component\Repository\ListFinderInterface;
 use Virhi\Component\Search\SearchInterface;
 use Virhi\RestApiDoctrineBundle\Api\Search\ListEntitySearch;
+use Virhi\RestApiDoctrineBundle\Api\Factory\ObjectStructureFactory;
 
 class ListFinder extends BaseRepository implements ListFinderInterface
 {
@@ -21,6 +22,7 @@ class ListFinder extends BaseRepository implements ListFinderInterface
      */
     public function find(SearchInterface $search)
     {
+        $result = array();
         if (!$search instanceof ListEntitySearch) {
             throw new \RuntimeException();
         }
@@ -33,12 +35,20 @@ class ListFinder extends BaseRepository implements ListFinderInterface
             $alias = 'p'.$index;
 
             $qb->addSelect($alias);
-            $qb->join('x.'.$join, $alias);
+            $qb->leftJoin('x.'.$join, $alias);
         }
 
-        $entitys = $qb->getQuery()->getArrayResult();
+        $entities  = $qb->getQuery()->getArrayResult();
+        $namespace = $search->getNamespace() .'\\'.ucfirst($search->getName());
 
-        return $entitys;
+        foreach ($entities as $entity) {
+            $table      = ObjectStructureFactory::getTables($this->getDoctrine(), $search->getName());
+            $metadata   = ObjectStructureFactory::getEntityMetadata($this->getDoctrine(), $namespace);
+
+            $result[]   = ObjectStructureFactory::buildObjectStructure($this->getDoctrine(), $metadata, $table, $entity);
+        }
+
+        return $result;
     }
 
 } 

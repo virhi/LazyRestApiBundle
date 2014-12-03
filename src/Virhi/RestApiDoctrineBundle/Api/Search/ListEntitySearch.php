@@ -14,11 +14,14 @@ class ListEntitySearch extends Search
 {
     protected $name;
 
+    protected $namespace;
+
     protected $joins;
 
-    function __construct($name, array $joins = array())
+    function __construct($name, $namespace, array $joins = array())
     {
         $this->name  = $name;
+        $this->namespace = $namespace;
         $this->joins = $joins;
     }
 
@@ -38,7 +41,12 @@ class ListEntitySearch extends Search
         return $this->joins;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
 
-
-
-} 
+}

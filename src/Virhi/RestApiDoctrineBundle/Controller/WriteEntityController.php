@@ -26,7 +26,7 @@ class WriteEntityController extends Controller
         die('yooo');
     }
 
-    public function updateAction(Request $request, $name)
+    public function updateAction(Request $request, $name, $id)
     {
         $imputEntity = json_decode($request->getContent());
 

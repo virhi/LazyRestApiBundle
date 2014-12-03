@@ -14,6 +14,8 @@ use Virhi\Component\Search\SearchInterface;
 use Virhi\RestApiDoctrineBundle\Api\Search\EntitySearch;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query;
+use Virhi\RestApiDoctrineBundle\Api\Factory\ObjectStructureFactory;
 
 class Finder extends BaseRepository implements FinderInterface
 {
@@ -31,7 +33,7 @@ class Finder extends BaseRepository implements FinderInterface
 
         $qb->select('x')
             ->from($this->manager . ':' . ucfirst($search->getName()), 'x')
-            ->where('x.id = :id')
+            ->where('x.'. $search->getIdentifier()[0].' = :id')
             ->setParameter('id', $search->getId())
         ;
 
@@ -39,32 +41,17 @@ class Finder extends BaseRepository implements FinderInterface
             $alias = 'p'.$index;
 
             $qb->addSelect($alias);
-            $qb->join('x.'.$join, $alias);
+            $qb->leftJoin('x.'.$join, $alias);
         }
 
+        $query      = $qb->getQuery();
+        $entity     = $query->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
 
-        $query   = $qb->getQuery();
-        $entity  = $query->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
+        $namespace  = $search->getNamespace() .'\\'.ucfirst($search->getName());
+        $table      = ObjectStructureFactory::getTables($this->getDoctrine(), $search->getName());
+        $metadata   = ObjectStructureFactory::getEntityMetadata($this->getDoctrine(), $namespace);
 
-        return $entity;
+        $result     = ObjectStructureFactory::buildObjectStructure($this->getDoctrine(), $metadata, $table, $entity);
+        return $result;
     }
-
-    /**
-     * @param QueryBuilder $qb
-     * @param EntitySearch $search
-     * @return \Doctrine\ORM\Query
-     */
-    public function getQuery(QueryBuilder $qb, EntitySearch $search)
-    {
-        $qb->select('x')
-            ->addSelect('p')
-            ->from($this->manager . ':' . ucfirst($search->getName()), 'x')
-            ->join('x.tags', 'p')
-            ->where('x.id = :id')
-            ->setParameter('id', $search->getId())
-        ;
-
-        return $qb->getQuery();
-    }
-
-} 
+}
