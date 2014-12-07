@@ -13,6 +13,7 @@ use Virhi\Component\Repository\Repository as BaseRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\QueryBuilder;
 
 class Repository extends BaseRepository
 {
@@ -23,5 +24,13 @@ class Repository extends BaseRepository
         parent::__construct($doctrine, $entiteManager);
 
         $this->manager = $manager;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    protected function createQueryBuilder()
+    {
+        return $this->getEntiteManager()->createQueryBuilder();
     }
 } 

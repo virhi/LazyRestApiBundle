@@ -49,7 +49,6 @@ class ObjectController extends Controller
         $query           = $this->get('virhi_rest_api_doctrine.query.object.object');
         $objectStructure = $query->execute($queryContext);
 
-
         $resource   = new ObjectStructureRessource($this->get('router'), $objectStructure);
         $reponse    = new HalResponse($resource);
         return $reponse;

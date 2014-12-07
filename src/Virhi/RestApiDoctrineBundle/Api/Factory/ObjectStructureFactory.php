@@ -46,9 +46,9 @@ class ObjectStructureFactory
         {
             $namespace     = $mapping['targetEntity'];
             $entityInfo    = explode('\\', $namespace);
-            $entityName    = end($entityInfo);
+            $entityName    = strtolower(end($entityInfo));
 
-            $tableEmbed    = self::getTables($doctrine, strtolower($entityName));
+            $tableEmbed    = self::getTables($doctrine, $entityName);
             $metadataEmbed = self::getEntityMetadata($doctrine, $namespace);
             $listEmbedObjectStructure = array();
 
@@ -59,7 +59,7 @@ class ObjectStructureFactory
                 }
             }
 
-            $embed = new Embed($mapping['fieldName'], $listEmbedObjectStructure);
+            $embed = new Embed($mapping['fieldName'], $entityName, $listEmbedObjectStructure);
             $structure->addEmbeded($embed);
         }
 

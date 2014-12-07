@@ -16,6 +16,7 @@ class ListObjectSearch extends Search
 
     function __construct($onlyPrimary = true)
     {
+        parent::__construct();
         $this->onlyPrimary = $onlyPrimary;
     }
 

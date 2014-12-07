@@ -5,6 +5,9 @@ parameters:
     virhi_rest_api_doctrine.transformer.contexttosearch.object.list_object.class: Virhi\RestApiDoctrineBundle\Api\Transformer\ContextToSearch\Object\ListObjectTransformer
     virhi_rest_api_doctrine.transformer.contexttosearch.object.object.class: Virhi\RestApiDoctrineBundle\Api\Transformer\ContextToSearch\Object\ObjectTransformer
 
+    virhi_rest_api_doctrine.transformer.entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\Entity\EntityTransformer
+    virhi_rest_api_doctrine.transformer.entity.list_entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\Entity\ListEntityTransformer
+
 services:
 
     virhi_rest_api_doctrine.transformer.contexttosearch.entity.entity:
@@ -20,3 +23,13 @@ services:
         class: %virhi_rest_api_doctrine.transformer.contexttosearch.object.object.class%
         arguments:
             - @virhi_rest_api_doctrine.service.entity_namespace
+
+    virhi_rest_api_doctrine.transformer.entity.entity:
+        class: %virhi_rest_api_doctrine.transformer.entity.entity.class%
+        arguments:
+            - @doctrine
+
+    virhi_rest_api_doctrine.transformer.entity.list_entity:
+        class: %virhi_rest_api_doctrine.transformer.entity.list_entity.class%
+        arguments:
+            - @doctrine

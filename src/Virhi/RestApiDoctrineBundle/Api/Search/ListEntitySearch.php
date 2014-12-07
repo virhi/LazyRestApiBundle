@@ -20,6 +20,8 @@ class ListEntitySearch extends Search
 
     function __construct($name, $namespace, array $joins = array())
     {
+        parent::__construct();
+
         $this->name  = $name;
         $this->namespace = $namespace;
         $this->joins = $joins;

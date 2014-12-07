@@ -12,7 +12,7 @@ use Virhi\Component\Query\Context\ContextInterface;
 use Virhi\Component\Query\QueryInterface;
 use Virhi\Component\Transformer\TransformerInterface;
 use Virhi\RestApiDoctrineBundle\Api\Service\EntityService;
-
+use Virhi\RestApiDoctrineBundle\Api\Factory\ObjectStructureFactory;
 
 class ListEntityQuery implements  QueryInterface
 {
@@ -26,16 +26,30 @@ class ListEntityQuery implements  QueryInterface
      */
     protected $transformer;
 
-    function __construct(EntityService $service, TransformerInterface $transformer)
+    protected $listEntityTransformer;
+
+    function __construct(EntityService $service, TransformerInterface $transformer, TransformerInterface $listEntityTransformer)
     {
         $this->service     = $service;
         $this->transformer = $transformer;
+        $this->listEntityTransformer = $listEntityTransformer;
     }
 
-
+    /**
+     * @param ContextInterface $context
+     * @return mixed
+     */
     public function execute(ContextInterface $context)
     {
-        return $this->service->find($this->transformer->transform($context));
+        $search    = $this->transformer->transform($context);
+        $entities  = $this->service->findList($search);
+
+        $obj = array(
+            'search'   => $search,
+            'entities' => $entities,
+        );
+
+        return $this->listEntityTransformer->transform($obj);
     }
 
 } 

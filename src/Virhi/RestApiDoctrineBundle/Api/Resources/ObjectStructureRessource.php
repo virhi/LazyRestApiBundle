@@ -49,9 +49,11 @@ class ObjectStructureRessource extends Resource
 
                     $tmpEmbed = array();
                     $tmpEmbed['fieldName'] = $embeded->getFieldName();
+                    $tmpEmbed['entityName'] = $embeded->getEntityName();
                     $entities = array();
 
                     foreach ($embeded->getListObjectStructure() as $index => $objectStructure) {
+
                         $entities[$index]['name']       = $objectStructure->getName();
                         $entities[$index]['identifier'] = $objectStructure->getIdentifier();
                         $entities[$index]['fields']     = $this->buildFields($objectStructure->getFields());

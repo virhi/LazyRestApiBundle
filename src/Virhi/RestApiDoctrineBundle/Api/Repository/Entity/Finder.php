@@ -29,7 +29,7 @@ class Finder extends BaseRepository implements FinderInterface
             throw new \RuntimeException();
         }
 
-        $qb = $this->getEntiteManager()->createQueryBuilder();
+        $qb = $this->createQueryBuilder();
 
         $qb->select('x')
             ->from($this->manager . ':' . ucfirst($search->getName()), 'x')
@@ -45,13 +45,6 @@ class Finder extends BaseRepository implements FinderInterface
         }
 
         $query      = $qb->getQuery();
-        $entity     = $query->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
-
-        $namespace  = $search->getNamespace() .'\\'.ucfirst($search->getName());
-        $table      = ObjectStructureFactory::getTables($this->getDoctrine(), $search->getName());
-        $metadata   = ObjectStructureFactory::getEntityMetadata($this->getDoctrine(), $namespace);
-
-        $result     = ObjectStructureFactory::buildObjectStructure($this->getDoctrine(), $metadata, $table, $entity);
-        return $result;
+        return $query->getSingleResult($search->getHydratation());
     }
 }

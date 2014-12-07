@@ -24,17 +24,35 @@ class EntityQuery implements  QueryInterface
     /**
      * @var TransformerInterface
      */
-    protected $transformer;
+    protected $contextToSearchTransformer;
 
-    function __construct(EntityService $service, TransformerInterface $transformer)
+    /**
+     * @var TransformerInterface
+     */
+    protected $entityTransformer;
+
+    function __construct(EntityService $service, TransformerInterface $contextToSearchTransformer, TransformerInterface $entityTransformer)
     {
         $this->service = $service;
-        $this->transformer = $transformer;
+        $this->contextToSearchTransformer = $contextToSearchTransformer;
+        $this->entityTransformer = $entityTransformer;
     }
 
+    /**
+     * @param ContextInterface $context
+     * @return mixed
+     */
     public function execute(ContextInterface $context)
     {
-        return $this->service->find($this->transformer->transform($context));
+        $search = $this->contextToSearchTransformer->transform($context);
+        $entity = $this->service->find($search);
+
+        $obj = array(
+            'search' => $search,
+            'entity' => $entity,
+        );
+
+        return $this->entityTransformer->transform($obj);
     }
 
 } 

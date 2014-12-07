@@ -12,12 +12,14 @@ services:
         arguments:
             - @virhi_rest_api_doctrine.service.entity
             - @virhi_rest_api_doctrine.transformer.contexttosearch.entity.entity
+            - @virhi_rest_api_doctrine.transformer.entity.entity
 
     virhi_rest_api_doctrine.query.entity.list_entity:
         class: %virhi_rest_api_doctrine.query.entity.list_entity.class%
         arguments:
             - @virhi_rest_api_doctrine.service.entity
             - @virhi_rest_api_doctrine.transformer.contexttosearch.entity.list_entity
+            - @virhi_rest_api_doctrine.transformer.entity.list_entity
 
     virhi_rest_api_doctrine.query.object.object:
         class: %virhi_rest_api_doctrine.query.object.object.class%

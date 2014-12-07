@@ -8,7 +8,6 @@
 
 namespace Virhi\RestApiDoctrineBundle\Api\Search;
 
-
 use Virhi\Component\Search\Search;
 
 class EntitySearch extends Search
@@ -25,6 +24,8 @@ class EntitySearch extends Search
 
     function __construct($id, $name, $namespace,  array $joins, array $identifier)
     {
+        parent::__construct();
+
         $this->id         = $id;
         $this->name       = $name;
         $this->joins      = $joins;

@@ -1,7 +1,19 @@
 parameters:
     virhi_rest_api_doctrine.command.create.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\CreateCommand
+    virhi_rest_api_doctrine.command.update.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\UpdateCommand
 
 services:
     virhi_rest_api_doctrine.command.create.entity:
         class: %virhi_rest_api_doctrine.command.create.entity.class%
-        arguments: [@virhi_rest_api_doctrine.repository.entity.attacher, @virhi_rest_api_doctrine.service.entity_namespace, @virhi_rest_api_doctrine.service.object]
+        arguments:
+            - @virhi_rest_api_doctrine.repository.entity.attacher
+            - @virhi_rest_api_doctrine.service.entity_namespace
+            - @virhi_rest_api_doctrine.service.object
+
+    virhi_rest_api_doctrine.command.update.entity:
+        class: %virhi_rest_api_doctrine.command.update.entity.class%
+        arguments:
+            - @virhi_rest_api_doctrine.repository.entity.attacher
+            - @virhi_rest_api_doctrine.service.entity_namespace
+            - @virhi_rest_api_doctrine.service.object
+            - @virhi_rest_api_doctrine.service.entity

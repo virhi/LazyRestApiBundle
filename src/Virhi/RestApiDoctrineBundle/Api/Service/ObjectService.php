@@ -12,6 +12,7 @@ use Virhi\RestApiDoctrineBundle\Api\Repository\Object\Finder;
 use Virhi\RestApiDoctrineBundle\Api\Repository\Object\ListFinder;
 use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
 use Virhi\RestApiDoctrineBundle\Api\Search\ListObjectSearch;
+use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
 
 class ObjectService 
 {
@@ -32,6 +33,10 @@ class ObjectService
         $this->listFinder = $listFinder;
     }
 
+    /**
+     * @param ObjectSearch $search
+     * @return ObjectStructure
+     */
     public function getObjectStructure(ObjectSearch $search)
     {
         return $this->finder->find($search);

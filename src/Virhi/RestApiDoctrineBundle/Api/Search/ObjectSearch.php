@@ -22,6 +22,8 @@ class ObjectSearch extends Search
 
     function __construct($name, $namespace)
     {
+        parent::__construct();
+
         $this->name = $name;
         $this->namespace = $namespace;
     }

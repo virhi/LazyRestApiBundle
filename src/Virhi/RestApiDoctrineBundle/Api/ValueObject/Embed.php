@@ -13,11 +13,14 @@ class Embed
 {
     protected $fieldName;
 
+    protected $entityName;
+
     protected $listObjectStructure;
 
-    function __construct($fieldName, array $listObjectStructure = array())
+    function __construct($fieldName, $entityName, array $listObjectStructure = array())
     {
-        $this->fieldName            = $fieldName;
+        $this->fieldName           = $fieldName;
+        $this->entityName          = $entityName;
         $this->listObjectStructure = new \ArrayObject();
         $this->addObjectStructure($listObjectStructure);
     }
@@ -44,5 +47,15 @@ class Embed
     {
         return $this->listObjectStructure;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEntityName()
+    {
+        return $this->entityName;
+    }
+
+
 
 }
