@@ -8,6 +8,8 @@ parameters:
     virhi_rest_api_doctrine.transformer.entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\Entity\EntityTransformer
     virhi_rest_api_doctrine.transformer.entity.list_entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\Entity\ListEntityTransformer
 
+    virhi_rest_api_doctrine.transformer.form_data_to_entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer
+
 services:
 
     virhi_rest_api_doctrine.transformer.contexttosearch.entity.entity:
@@ -33,3 +35,10 @@ services:
         class: %virhi_rest_api_doctrine.transformer.entity.list_entity.class%
         arguments:
             - @doctrine
+
+    virhi_rest_api_doctrine.transformer.form_data_to_entity.entity:
+        class: %virhi_rest_api_doctrine.transformer.form_data_to_entity.entity.class%
+        arguments:
+            - @virhi_rest_api_doctrine.service.entity_namespace
+            - @virhi_rest_api_doctrine.service.object
+            - @virhi_rest_api_doctrine.service.entity

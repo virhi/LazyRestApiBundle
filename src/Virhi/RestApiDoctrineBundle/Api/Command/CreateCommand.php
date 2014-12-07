@@ -17,6 +17,7 @@ use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
 use Virhi\RestApiDoctrineBundle\Api\Service\ObjectService;
 use Doctrine\DBAL\Schema\Table;
 use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
+use Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer;
 
 class CreateCommand implements CommandInterface
 {
@@ -30,16 +31,13 @@ class CreateCommand implements CommandInterface
      */
     protected $entityNamespaceService;
 
-    /**
-     * @var ObjectService
-     */
-    protected $objectService;
+    protected $transformer;
 
-    function __construct(AttacherInterface $attacher, EntityNamespaceService $entityNamespaceService, ObjectService $objectService)
+    function __construct(AttacherInterface $attacher, EntityNamespaceService $entityNamespaceService, EntityTransformer $transformer)
     {
         $this->attacher               = $attacher;
         $this->entityNamespaceService = $entityNamespaceService;
-        $this->objectService          = $objectService;
+        $this->transformer            = $transformer;
     }
 
 
@@ -52,21 +50,13 @@ class CreateCommand implements CommandInterface
         $entityFullName = $this->entityNamespaceService->getEntityFullName($context->getName());
         $entity    = new $entityFullName();
 
-        $search    = new ObjectSearch($context->getName(), $entityFullName);
-        $structure = $this->objectService->getObjectStructure($search);
+        $objToTransform = array(
+            'name'        => $context->getName(),
+            'imputEntity' => $context->getImputEntity(),
+            'entity'      => $entity,
+        );
 
-        $this->populEntity($structure, $entity, $context->getImputEntity());
+        $entity = $this->transformer->transform($objToTransform);
         $this->attacher->attach($entity);
     }
-
-    protected function populEntity(ObjectStructure $table, $entity, $inputEntity)
-    {
-        foreach (get_object_vars($inputEntity) as $varName => $value) {
-            if ($table->hasField($varName)){
-                $entity->{'set'. ucfirst($varName)}($value);
-            } else {
-                throw new \RuntimeException('the property : ' . $varName . ' dos not exist for entity : ' . get_class($entity));
-            }
-        }
-    }
-} 
+}
