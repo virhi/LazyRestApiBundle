@@ -11,14 +11,8 @@ namespace Virhi\RestApiDoctrineBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Alterway\Bundle\RestHalBundle\Response\HalResponse;
 
-use Virhi\RestApiDoctrineBundle\Api\Factory\TableResourceFactory;
-use Virhi\RestApiDoctrineBundle\Api\Factory\SchemaResourceFactory;
-
 use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ListObjectContext;
 use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ObjectContext;
-use Virhi\RestApiDoctrineBundle\Api\Resources\Context\TableContext;
-use Virhi\RestApiDoctrineBundle\Api\Resources\Context\ObjectStructureContext;
-use Virhi\RestApiDoctrineBundle\Api\Resources\Context\SchemaContext;
 
 use Virhi\RestApiDoctrineBundle\Api\Resources\ObjectStructureRessource;
 use Virhi\RestApiDoctrineBundle\Api\Resources\ListObjectStructureRessource;

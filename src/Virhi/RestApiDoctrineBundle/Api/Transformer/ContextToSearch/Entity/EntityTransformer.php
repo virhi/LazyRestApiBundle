@@ -24,6 +24,15 @@ class EntityTransformer implements TransformerInterface
             throw new \RuntimeException();
         }
 
+        return $this->execute($context);
+    }
+
+    /**
+     * @param $context
+     * @return EntitySearch
+     */
+    protected function execute($context)
+    {
         $objectStructure = $context->getObjectStructure();
         $joins = array();
 

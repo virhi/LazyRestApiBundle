@@ -1,6 +1,7 @@
 parameters:
     virhi_rest_api_doctrine.command.create.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\CreateCommand
     virhi_rest_api_doctrine.command.update.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\UpdateCommand
+    virhi_rest_api_doctrine.command.remover.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\RemoveCommand
 
 services:
     virhi_rest_api_doctrine.command.create.entity:
@@ -15,3 +16,10 @@ services:
         arguments:
             - @virhi_rest_api_doctrine.repository.entity.attacher
             - @virhi_rest_api_doctrine.transformer.form_data_to_entity.entity
+
+    virhi_rest_api_doctrine.command.remover.entity:
+        class: %virhi_rest_api_doctrine.command.remover.entity.class%
+        arguments:
+            - @virhi_rest_api_doctrine.repository.entity.remover
+            - @virhi_rest_api_doctrine.repository.entity.finder
+            - @virhi_rest_api_doctrine.transformer.contexttosearch.entity.remove

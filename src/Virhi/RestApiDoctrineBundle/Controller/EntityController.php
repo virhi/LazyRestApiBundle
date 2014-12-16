@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Alterway\Bundle\RestHalBundle\Response\HalResponse;
 use Virhi\RestApiDoctrineBundle\Api\Factory\ListEntityResourceFactory;
 use Virhi\RestApiDoctrineBundle\Api\Factory\EntityResourceFactory;
-use Virhi\RestApiDoctrineBundle\Api\Resources\ObjectStructureRessource;
 
 use Virhi\RestApiDoctrineBundle\Api\Resources\Context\ListEntityContext;
 use Virhi\RestApiDoctrineBundle\Api\Resources\Context\EntityContext;

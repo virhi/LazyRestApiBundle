@@ -2,6 +2,7 @@ parameters:
     virhi_rest_api_doctrine.repository.entity.finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder
     virhi_rest_api_doctrine.repository.entity.list_finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\ListFinder
     virhi_rest_api_doctrine.repository.entity.attacher.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Attacher
+    virhi_rest_api_doctrine.repository.entity.remover.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Remover
 
     virhi_rest_api_doctrine.repository.object.finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Object\Finder
     virhi_rest_api_doctrine.repository.object.list_finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Object\ListFinder
@@ -19,6 +20,11 @@ services:
     virhi_rest_api_doctrine.repository.entity.attacher:
         class: %virhi_rest_api_doctrine.repository.entity.attacher.class%
         arguments: [@doctrine, @doctrine.orm.default_entity_manager, %virhi_rest_api_doctrine.manager%]
+
+    virhi_rest_api_doctrine.repository.entity.remover:
+            class: %virhi_rest_api_doctrine.repository.entity.remover.class%
+            arguments: [@doctrine, @doctrine.orm.default_entity_manager, %virhi_rest_api_doctrine.manager%]
+
 
     virhi_rest_api_doctrine.repository.object.finder:
         class: %virhi_rest_api_doctrine.repository.object.finder.class%

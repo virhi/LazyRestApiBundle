@@ -10,9 +10,10 @@ namespace Virhi\RestApiDoctrineBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
+use Virhi\RestApiDoctrineBundle\Api\Query\Context\Object\ObjectContext;
+use Virhi\RestApiDoctrineBundle\Api\Command\Context\RemoveContext;
 
 class WriteEntityController extends Controller
 {
@@ -27,6 +28,7 @@ class WriteEntityController extends Controller
             $command->execute($context);
         } catch (\Exception $e) {
             $statut = 500;
+            $this->get('logger')->addError($e->getMessage());
         }
 
         return new JsonResponse(array(), $statut);
@@ -44,6 +46,26 @@ class WriteEntityController extends Controller
             $command->execute($context);
         } catch (\Exception $e) {
             $statut = 500;
+            $this->get('logger')->addError($e->getMessage());
+        }
+
+        return new JsonResponse(array(), $statut);
+    }
+
+    public function removeAction($name, $id)
+    {
+        $statut = 200;
+        try {
+            $queryObjectContext    = new ObjectContext($name);
+            $queryObject           = $this->get('virhi_rest_api_doctrine.query.object.object');
+            $objectStructure       = $queryObject->execute($queryObjectContext);
+            $queryContext          = new RemoveContext($id, $name, $objectStructure);
+            $command               = $this->get('virhi_rest_api_doctrine.command.remover.entity');
+
+            $command->execute($queryContext);
+        } catch (\Exception $e) {
+            $statut = 500;
+            $this->get('logger')->addError($e->getMessage());
         }
 
         return new JsonResponse(array(), $statut);
