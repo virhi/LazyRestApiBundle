@@ -13,10 +13,6 @@ use Virhi\Component\Command\Context\ContextInterface;
 use Virhi\Component\Repository\AttacherInterface;
 use Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService;
 use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
-use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
-use Virhi\RestApiDoctrineBundle\Api\Service\ObjectService;
-use Doctrine\DBAL\Schema\Table;
-use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
 use Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer;
 
 class CreateCommand implements CommandInterface
@@ -41,6 +37,9 @@ class CreateCommand implements CommandInterface
     }
 
 
+    /**
+     * @param ContextInterface $context
+     */
     public function execute(ContextInterface $context)
     {
         if (!$context instanceof Context) {
@@ -48,7 +47,7 @@ class CreateCommand implements CommandInterface
         }
 
         $entityFullName = $this->entityNamespaceService->getEntityFullName($context->getName());
-        $entity    = new $entityFullName();
+        $entity = new $entityFullName();
 
         $objToTransform = array(
             'name'        => $context->getName(),
