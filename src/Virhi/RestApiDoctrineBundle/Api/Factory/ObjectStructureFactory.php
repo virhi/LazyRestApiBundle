@@ -29,7 +29,7 @@ class ObjectStructureFactory
             $field = new Field();
             $field->setName($rawField['fieldName']);
             $field->setType($column->getType());
-            $field->getAutoIncrement($column->getAutoincrement());
+            $field->setAutoIncrement($column->getAutoincrement());
             $field->setLength($column->getLength());
             $field->setComment($column->getComment());
             $field->setDefinition($column->getColumnDefinition());
