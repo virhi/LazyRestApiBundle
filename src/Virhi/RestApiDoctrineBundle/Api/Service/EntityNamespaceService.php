@@ -28,7 +28,6 @@ class EntityNamespaceService
         $result = null;
         $em = $this->doctrine->getEntityManager();
 
-
         foreach ($em->getConfiguration()->getEntityNamespaces() as $namespace) {
             $tmpClass = '\\' . $namespace . '\\' . $entityName;
             if (class_exists($tmpClass)) {
@@ -37,7 +36,7 @@ class EntityNamespaceService
         }
 
         if ($result === null) {
-            throw new \RuntimeException();
+            throw new \RuntimeException("entity not found");
         }
 
         return $result;
