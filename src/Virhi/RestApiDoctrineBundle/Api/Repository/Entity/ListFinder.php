@@ -31,11 +31,19 @@ class ListFinder extends BaseRepository implements ListFinderInterface
         $qb->select('x')
             ->from($this->manager . ':' .ucfirst($search->getName()), 'x');
 
-        foreach ($search->getJoins() as $index => $join) {
-            $alias = 'p'.$index;
 
-            $qb->addSelect($alias);
-            $qb->leftJoin('x.'.$join, $alias);
+        if (count($search->getLimits())) {
+            foreach ($search->getLimits()->getList() as $limit) {
+                $limitInfo = explode(':', $limit);
+
+                if (array_key_exists(0, $limitInfo)) {
+                    $qb->setFirstResult($limitInfo[0]);
+                }
+
+                if (array_key_exists(1, $limitInfo)) {
+                    $qb->setMaxResults($limitInfo[1]);
+                }
+            }
         }
 
         return $qb->getQuery()->getArrayResult();

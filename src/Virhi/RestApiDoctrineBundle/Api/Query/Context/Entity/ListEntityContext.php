@@ -20,10 +20,13 @@ class ListEntityContext implements ContextInterface
      */
     protected $objectStructure;
 
-    function __construct($name, ObjectStructure $objectStructure)
+    protected $limit;
+
+    function __construct($name, ObjectStructure $objectStructure, $limit = null)
     {
         $this->name = $name;
         $this->objectStructure = $objectStructure;
+        $this->limit = $limit;
     }
 
     /**
@@ -41,4 +44,14 @@ class ListEntityContext implements ContextInterface
     {
         return $this->objectStructure;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+
 }

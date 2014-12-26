@@ -15,8 +15,8 @@ virhi_rest_api_doctrine_object:
     defaults: { _controller: VirhiRestApiDoctrineBundle:Object:object }
 
 virhi_rest_api_doctrine_list_entity:
-    path:     /api/entitys/{name}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Entity:listEntity }
+    path:     /api/entitys/{name}/{limit}
+    defaults: { _controller: VirhiRestApiDoctrineBundle:Entity:listEntity, limit: null  }
 
 virhi_rest_api_doctrine_entity:
     path:     /api/entity/{name}/{id}

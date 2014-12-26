@@ -34,6 +34,12 @@ class ListEntityTransformer implements TransformerInterface
             }
         }
 
-        return new ListEntitySearch($context->getName(), $context->getObjectStructure()->getNamespace(), $joins);
+        $search = new ListEntitySearch($context->getName(), $context->getObjectStructure()->getNamespace(), $joins);
+
+        if (null !== $context->getLimit()) {
+            $search->addLimit($context->getLimit());
+        }
+
+        return $search;
     }
 } 
