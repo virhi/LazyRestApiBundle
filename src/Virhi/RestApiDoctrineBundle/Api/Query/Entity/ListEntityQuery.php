@@ -44,12 +44,7 @@ class ListEntityQuery implements  QueryInterface
         $search    = $this->transformer->transform($context);
         $entities  = $this->service->findList($search);
 
-        $obj = array(
-            'search'   => $search,
-            'entities' => $entities,
-        );
-
-        return $this->listEntityTransformer->transform($obj);
+        return $entities;
     }
 
 } 

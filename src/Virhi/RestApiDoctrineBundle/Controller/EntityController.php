@@ -24,6 +24,7 @@ class EntityController extends Controller
 {
     public function listEntityAction($name, $limit)
     {
+
         $queryObjectContext    = new ObjectContext($name);
         $queryObject           = $this->get('virhi_rest_api_doctrine.query.object.object');
         $objectStructure       = $queryObject->execute($queryObjectContext);

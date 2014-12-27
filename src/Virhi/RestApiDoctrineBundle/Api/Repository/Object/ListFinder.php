@@ -45,7 +45,7 @@ class ListFinder extends BaseRepository implements ListFinderInterface
             throw new \RuntimeException();
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em        = $this->getDoctrine()->getManager();
         $metadatas = $em->getMetadataFactory()->getAllMetadata();
 
         foreach ($metadatas as $tmpMetadata) {

@@ -25,3 +25,5 @@ services:
         arguments:
             - @virhi_rest_api_doctrine.repository.entity.finder
             - @virhi_rest_api_doctrine.repository.entity.list_finder
+            - @virhi_rest_api_doctrine.repository.entity.count_list_finder
+            - @virhi_rest_api_doctrine.transformer.entity.list_entity

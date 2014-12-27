@@ -10,15 +10,18 @@ namespace Virhi\RestApiDoctrineBundle\Api\Resources;
 
 use Symfony\Component\Routing\RouterInterface;
 use Alterway\Bundle\RestHalBundle\ApiResource\Resource;
+use Virhi\Component\Collection\MetaDataCollection;
+use Virhi\RestApiDoctrineBundle\Api\Factory\EntityResourceFactory;
+use Virhi\RestApiDoctrineBundle\Api\Resources\Context\EntityContext;
 
 class ListEntityRessource extends Resource
 {
     /**
-     * @var array
+     * @var MetaDataCollection
      */
     protected $list;
 
-    function __construct(RouterInterface $router, array $list = array())
+    function __construct(RouterInterface $router, MetaDataCollection $list )
     {
         parent::__construct($router);
         $this->list = $list;
@@ -26,8 +29,15 @@ class ListEntityRessource extends Resource
 
     protected function prepare()
     {
-        foreach ($this->list as $entity) {
-            $this->addResource('entitys', $entity);
+        $data = array(
+            'total' => $this->list->getNbTotal()
+        );
+        
+        $this->setData($data);
+
+        foreach ($this->list->getList() as $entity) {
+            $contextEntity = new EntityContext($entity, $this->router);
+            $this->addResource('entitys', EntityResourceFactory::buildResource($contextEntity));
         }
     }
 

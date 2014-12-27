@@ -26,13 +26,7 @@ class ListEntityResourceFactory extends ResourceFactory implements ResourceFacto
             throw new \RuntimeException("Wrong context");
         }
 
-        $list     = array();
-        foreach ($context->getList() as $entity) {
-            $contextEntity = new EntityContext($entity, $context->getRouter());
-            $list[] = EntityResourceFactory::buildResource($contextEntity);
-        }
-
-        $resource = new ListEntityRessource($context->getRouter(), $list);
+        $resource = new ListEntityRessource($context->getRouter(), $context->getList());
         return $resource;
     }
 

@@ -9,19 +9,23 @@
 namespace Virhi\RestApiDoctrineBundle\Api\Resources\Context;
 
 use Symfony\Component\Routing\RouterInterface;
+use Virhi\Component\Collection\MetaDataCollection;
 
 class ListEntityContext extends Context
 {
+    /**
+     * @var MetaDataCollection
+     */
     protected $list;
 
-    function __construct($list, RouterInterface $router)
+    function __construct(MetaDataCollection $list, RouterInterface $router)
     {
         $this->list = $list;
         parent::__construct($router);
     }
 
     /**
-     * @return mixed
+     * @return MetaDataCollection
      */
     public function getList()
     {
