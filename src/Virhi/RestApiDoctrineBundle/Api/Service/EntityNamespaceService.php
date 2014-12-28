@@ -29,7 +29,7 @@ class EntityNamespaceService
         $em = $this->doctrine->getEntityManager();
 
         foreach ($em->getConfiguration()->getEntityNamespaces() as $namespace) {
-            $tmpClass = '\\' . $namespace . '\\' . $entityName;
+            $tmpClass = '\\' . $namespace . '\\' . ucfirst($entityName);
             if (class_exists($tmpClass)) {
                 $result = $tmpClass;
             }

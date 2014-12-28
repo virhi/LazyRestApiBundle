@@ -24,6 +24,7 @@
     "require": {
         "virhi/RestHalBundle": "@dev",
         "virhi/component": "@dev",
+        "virhi/paginationbundle": "@dev",
         "doctrine/orm": "~2.2,>=2.2.3"
     },
 
