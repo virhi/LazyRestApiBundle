@@ -10,12 +10,15 @@ services:
             - @virhi_rest_api_doctrine.repository.entity.attacher
             - @virhi_rest_api_doctrine.service.entity_namespace
             - @virhi_rest_api_doctrine.transformer.form_data_to_entity.entity
+            - @virhi_rest_api_doctrine.specification.authorized_creation
 
     virhi_rest_api_doctrine.command.update.entity:
         class: %virhi_rest_api_doctrine.command.update.entity.class%
         arguments:
             - @virhi_rest_api_doctrine.repository.entity.attacher
             - @virhi_rest_api_doctrine.transformer.form_data_to_entity.entity
+            - @virhi_rest_api_doctrine.service.entity_namespace
+            - @virhi_rest_api_doctrine.specification.authorized_update
 
     virhi_rest_api_doctrine.command.remover.entity:
         class: %virhi_rest_api_doctrine.command.remover.entity.class%
@@ -23,3 +26,4 @@ services:
             - @virhi_rest_api_doctrine.repository.entity.remover
             - @virhi_rest_api_doctrine.repository.entity.finder
             - @virhi_rest_api_doctrine.transformer.contexttosearch.entity.remove
+            - @virhi_rest_api_doctrine.specification.authorized_delete

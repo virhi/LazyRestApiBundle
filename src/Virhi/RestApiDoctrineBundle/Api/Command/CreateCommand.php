@@ -14,6 +14,7 @@ use Virhi\Component\Repository\AttacherInterface;
 use Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService;
 use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
 use Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer;
+use Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityCreationSpecification;
 
 class CreateCommand implements CommandInterface
 {
@@ -27,13 +28,22 @@ class CreateCommand implements CommandInterface
      */
     protected $entityNamespaceService;
 
+    /**
+     * @var EntityTransformer
+     */
     protected $transformer;
 
-    function __construct(AttacherInterface $attacher, EntityNamespaceService $entityNamespaceService, EntityTransformer $transformer)
+    /**
+     * @var AuthorizedEntityCreationSpecification
+     */
+    protected $authorizedEntityCreationSpecification;
+
+    function __construct(AttacherInterface $attacher, EntityNamespaceService $entityNamespaceService, EntityTransformer $transformer, AuthorizedEntityCreationSpecification $authorizedEntityCreationSpecification)
     {
         $this->attacher               = $attacher;
         $this->entityNamespaceService = $entityNamespaceService;
         $this->transformer            = $transformer;
+        $this->authorizedEntityCreationSpecification = $authorizedEntityCreationSpecification;
     }
 
 
@@ -47,6 +57,11 @@ class CreateCommand implements CommandInterface
         }
 
         $entityFullName = $this->entityNamespaceService->getEntityFullName($context->getName());
+
+        if (!$this->authorizedEntityCreationSpecification->isSatisfiedBy($entityFullName)) {
+            throw new \RuntimeException('invalide action');
+        }
+
         $entity = new $entityFullName();
 
         $objToTransform = array(

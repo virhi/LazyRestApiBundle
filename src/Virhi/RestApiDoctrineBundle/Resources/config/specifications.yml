@@ -1,9 +1,27 @@
 parameters:
     virhi_rest_api_doctrine.specification.authorized_entity.class: Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntitySpecification
+    virhi_rest_api_doctrine.specification.authorized_creation.class: Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityCreationSpecification
+    virhi_rest_api_doctrine.specification.authorized_delete.class: Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityDeleteSpecification
+    virhi_rest_api_doctrine.specification.authorized_update.class: Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityUpdateSpecification
 
 services:
 
     virhi_rest_api_doctrine.specification.authorized_entity:
         class: %virhi_rest_api_doctrine.specification.authorized_entity.class%
+        arguments:
+            - %virhi_rest_api_doctrine.expose_entities%
+
+    virhi_rest_api_doctrine.specification.authorized_creation:
+        class: %virhi_rest_api_doctrine.specification.authorized_creation.class%
+        arguments:
+            - %virhi_rest_api_doctrine.expose_entities%
+
+    virhi_rest_api_doctrine.specification.authorized_delete:
+        class: %virhi_rest_api_doctrine.specification.authorized_delete.class%
+        arguments:
+            - %virhi_rest_api_doctrine.expose_entities%
+
+    virhi_rest_api_doctrine.specification.authorized_update:
+        class: %virhi_rest_api_doctrine.specification.authorized_update.class%
         arguments:
             - %virhi_rest_api_doctrine.expose_entities%

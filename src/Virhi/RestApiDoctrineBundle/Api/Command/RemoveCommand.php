@@ -15,6 +15,7 @@ use Virhi\RestApiDoctrineBundle\Api\Command\Context\RemoveContext;
 use Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder;
 use Virhi\Component\Transformer\TransformerInterface;
 use Doctrine\ORM\AbstractQuery;
+use Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityDeleteSpecification;
 
 class RemoveCommand implements CommandInterface
 {
@@ -33,16 +34,26 @@ class RemoveCommand implements CommandInterface
      */
     protected $contextToSearchTransformer;
 
-    function __construct(RemoverInterface $remover, Finder $finder, TransformerInterface $contextToSearchTransformer)
+    /**
+     * @var AuthorizedEntityDeleteSpecification
+     */
+    protected $authorizedEntityDeleteSpecification;
+
+    function __construct(RemoverInterface $remover, Finder $finder, TransformerInterface $contextToSearchTransformer, AuthorizedEntityDeleteSpecification $authorizedEntityDeleteSpecification)
     {
         $this->remover = $remover;
         $this->finder  = $finder;
         $this->contextToSearchTransformer = $contextToSearchTransformer;
+        $this->authorizedEntityDeleteSpecification = $authorizedEntityDeleteSpecification;
     }
 
     public function execute(ContextInterface $context)
     {
         if (!$context instanceof RemoveContext) {
+            throw new \RuntimeException();
+        }
+
+        if (!$this->authorizedEntityDeleteSpecification->isSatisfiedBy($context->getObjectStructure()->getName())) {
             throw new \RuntimeException();
         }
 

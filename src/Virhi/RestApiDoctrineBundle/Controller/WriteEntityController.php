@@ -20,6 +20,7 @@ class WriteEntityController extends Controller
     public function createAction(Request $request, $name)
     {
         $statut = 200;
+        $reponseData = array();
         try {
             $imputEntity = json_decode($request->getContent());
 
@@ -29,9 +30,10 @@ class WriteEntityController extends Controller
         } catch (\Exception $e) {
             $statut = 500;
             $this->get('logger')->addError($e->getMessage());
+            $reponseData['message'] =  $e->getMessage();
         }
 
-        return new JsonResponse(array(), $statut);
+        return new JsonResponse($reponseData, $statut);
 
     }
 

@@ -27,10 +27,19 @@ class AuthorizedEntitySpecification implements SpecificationInterface
     public function isSatisfiedBy($entity)
     {
         $result = false;
-        if ($entity instanceof ObjectStructure && ( count($this->authorizedEntities) === 0 || in_array($entity->getName(), $this->authorizedEntities))) {
-            $result = true;
+        if ($entity instanceof ObjectStructure) {
+            if (count($this->authorizedEntities) > 0 ) {
+                foreach ($this->authorizedEntities as $authorizedEntity) {
+                    if ($entity->getName() === $authorizedEntity['entity_name']) {
+                        $result = true;
+                        break;
+                    }
+                }
+            }
+            elseif (count($this->authorizedEntities) === 0) {
+                $result = true;
+            }
         }
-
         return $result;
     }
 

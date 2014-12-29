@@ -37,6 +37,8 @@ class ObjectStructureRessource extends Resource
         $data['embeds']     = $this->buildEmbed($this->objectStructure->getEmbeded());
 
         $this->setData($data);
+
+        $this->generateUri();
     }
 
     protected function buildEmbed($embeds)
@@ -90,6 +92,7 @@ class ObjectStructureRessource extends Resource
 
     protected function generateUri()
     {
+
         return ''; //$this->router->generate('virhi_symfony_application_post_all');
     }
 } 

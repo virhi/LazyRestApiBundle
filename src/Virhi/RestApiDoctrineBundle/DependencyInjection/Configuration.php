@@ -40,9 +40,20 @@ class Configuration implements ConfigurationInterface
     {
         $rootNode->children()
             ->arrayNode('expose_entities')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
+                    ->children()
+                        ->scalarNode('entity_name')->end()
+                        ->scalarNode('create_mode')->defaultValue(false)->end()
+                        ->scalarNode('edit_mode')->defaultValue(false)->end()
+                        ->scalarNode('delete_mode')->defaultValue(false)->end()
+                    ->end()
+                ->end()
+
+            /*
             ->prototype('scalar')
             ->defaultValue(array())
-
+            */
             //->addDefaultChildrenIfNoneSet(array())
             ->end();
     }
