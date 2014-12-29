@@ -42,9 +42,18 @@ class CreateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('transform')
             ->will($this->returnValue(null));
 
+        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityCreationSpecification')
+            ->disableOriginalConstructor()
+            ->setMethods(array('isSatisfiedBy'))
+            ->getMock();
+
+        $specification->expects($this->once())
+            ->method('isSatisfiedBy')
+            ->will($this->returnValue(true));
+
 
         $context = new Context('toto', array());
-        $command = new CreateCommand($attacher, $entityNamespaceService, $transformer);
+        $command = new CreateCommand($attacher, $entityNamespaceService, $transformer, $specification);
         $command->execute($context);
     }
 } 

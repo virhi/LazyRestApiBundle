@@ -34,8 +34,17 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityDeleteSpecification')
+            ->disableOriginalConstructor()
+            ->setMethods(array('isSatisfiedBy'))
+            ->getMock();
+
+        $specification->expects($this->once())
+            ->method('isSatisfiedBy')
+            ->will($this->returnValue(true));
+
         $context = new Context('toto', array());
-        $command = new RemoveCommand($remover, $finder, $transformer);
+        $command = new RemoveCommand($remover, $finder, $transformer, $specification);
         $command->execute($context);
     }
 
@@ -68,8 +77,17 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
             ->method('remove')
             ->will($this->returnValue(null));
 
+        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityDeleteSpecification')
+            ->disableOriginalConstructor()
+            ->setMethods(array('isSatisfiedBy'))
+            ->getMock();
+
+        $specification->expects($this->once())
+            ->method('isSatisfiedBy')
+            ->will($this->returnValue(true));
+
         $context = new RemoveContext(1, 'toto', array());
-        $command = new RemoveCommand($remover, $finder, $transformer);
+        $command = new RemoveCommand($remover, $finder, $transformer, $specification);
         $command->execute($context);
     }
 } 
