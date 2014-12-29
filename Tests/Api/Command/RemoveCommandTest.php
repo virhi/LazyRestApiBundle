@@ -12,6 +12,7 @@ use Virhi\RestApiDoctrineBundle\Api\Command\RemoveCommand;
 use Virhi\RestApiDoctrineBundle\Api\Command\Context\RemoveContext;
 use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
 use Virhi\Component\Search\Search;
+use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
 
 class RemoveCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -86,7 +87,7 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
             ->method('isSatisfiedBy')
             ->will($this->returnValue(true));
 
-        $context = new RemoveContext(1, 'toto', array());
+        $context = new RemoveContext(1, 'toto', new ObjectStructure('toto', 'tata'));
         $command = new RemoveCommand($remover, $finder, $transformer, $specification);
         $command->execute($context);
     }
