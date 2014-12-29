@@ -13,7 +13,8 @@ use Virhi\RestApiDoctrineBundle\Api\Repository\Object\ListFinder;
 use Virhi\RestApiDoctrineBundle\Api\Search\ObjectSearch;
 use Virhi\RestApiDoctrineBundle\Api\Search\ListObjectSearch;
 use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
-
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Virhi\RestApiDoctrineBundle\Api\Event\Object\ListObjectEvent;
 class ObjectService 
 {
     /**
@@ -26,11 +27,14 @@ class ObjectService
      */
     protected $listFinder;
 
+    protected $eventDispatcher;
 
-    function __construct(Finder $finder, ListFinder $listFinder)
+
+    function __construct(Finder $finder, ListFinder $listFinder, EventDispatcher $eventDispatcher)
     {
         $this->finder = $finder;
         $this->listFinder = $listFinder;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -44,6 +48,10 @@ class ObjectService
 
     public function getListObjectStructure(ListObjectSearch $search)
     {
-        return $this->listFinder->find($search);
+        $rawList = $this->listFinder->find($search);
+        $event   = new ListObjectEvent($rawList);
+        $this->eventDispatcher->dispatch($event->getName(), $event);
+
+        return $event->getList();
     }
 } 

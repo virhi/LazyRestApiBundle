@@ -4,6 +4,8 @@ namespace Virhi\RestApiDoctrineBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -25,11 +27,23 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
+        $this->addRestApiNode($rootNode);
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
 
         return $treeBuilder;
+    }
+
+    public function addRestApiNode(ArrayNodeDefinition $rootNode)
+    {
+        $rootNode->children()
+            ->arrayNode('expose_entities')
+            ->prototype('scalar')
+            ->defaultValue(array())
+
+            //->addDefaultChildrenIfNoneSet(array())
+            ->end();
     }
 }

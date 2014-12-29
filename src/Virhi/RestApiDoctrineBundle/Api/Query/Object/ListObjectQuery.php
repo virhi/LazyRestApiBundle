@@ -35,6 +35,7 @@ class ListObjectQuery implements QueryInterface
 
     public function execute(ContextInterface $context)
     {
+
         return $this->service->getListObjectStructure($this->transformer->transform($context));
     }
 } 

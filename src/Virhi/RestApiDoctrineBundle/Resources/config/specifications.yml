@@ -1,0 +1,9 @@
+parameters:
+    virhi_rest_api_doctrine.specification.authorized_entity.class: Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntitySpecification
+
+services:
+
+    virhi_rest_api_doctrine.specification.authorized_entity:
+        class: %virhi_rest_api_doctrine.specification.authorized_entity.class%
+        arguments:
+            - %virhi_rest_api_doctrine.expose_entities%

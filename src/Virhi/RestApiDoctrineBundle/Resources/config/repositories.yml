@@ -33,7 +33,11 @@ services:
 
     virhi_rest_api_doctrine.repository.object.finder:
         class: %virhi_rest_api_doctrine.repository.object.finder.class%
-        arguments: [@doctrine, @doctrine.orm.default_entity_manager, %virhi_rest_api_doctrine.manager%]
+        arguments:
+            - @virhi_rest_api_doctrine.specification.authorized_entity
+            - @doctrine
+            - @doctrine.orm.default_entity_manager
+            - %virhi_rest_api_doctrine.manager%
 
     virhi_rest_api_doctrine.repository.object.list_finder:
         class: %virhi_rest_api_doctrine.repository.object.list_finder.class%

@@ -3,6 +3,8 @@ imports:
     - { resource: queries.yml }
     - { resource: commands.yml }
     - { resource: transformers.yml }
+    - { resource: subscribers.yml }
+    - { resource: specifications.yml }
 
 parameters:
     virhi_rest_api_doctrine.service.entity_namespace.class: Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService
@@ -19,6 +21,7 @@ services:
         arguments:
             - @virhi_rest_api_doctrine.repository.object.finder
             - @virhi_rest_api_doctrine.repository.object.list_finder
+            - @event_dispatcher
 
     virhi_rest_api_doctrine.service.entity:
         class: %virhi_rest_api_doctrine.service.entity.class%

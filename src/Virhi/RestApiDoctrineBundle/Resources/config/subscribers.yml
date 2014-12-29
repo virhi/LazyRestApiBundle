@@ -1,0 +1,12 @@
+parameters:
+    virhi_rest_api_doctrine.subscriber.object.list.class: Virhi\RestApiDoctrineBundle\Api\Subscriber\Object\ListObjectSubscriber
+
+
+services:
+
+    virhi_rest_api_doctrine.subscriber.object.list:
+        class: %virhi_rest_api_doctrine.subscriber.object.list.class%
+        arguments:
+            - @virhi_rest_api_doctrine.specification.authorized_entity
+        tags:
+            -  { name: kernel.event_subscriber }
