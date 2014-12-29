@@ -37,18 +37,12 @@ class UpdateCommandTest extends \PHPUnit_Framework_TestCase
             ->setMethods(array('getEntityFullName'))
             ->getMock();
 
-        $entityNamespaceService->expects($this->once())
-            ->method('getEntityFullName')
-            ->will($this->returnValue('\stdClass'));
 
         $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityUpdateSpecification')
             ->disableOriginalConstructor()
             ->setMethods(array('isSatisfiedBy'))
             ->getMock();
 
-        $specification->expects($this->once())
-            ->method('isSatisfiedBy')
-            ->will($this->returnValue(true));
 
         $command = new UpdateCommand($attacher, $transformer, $entityNamespaceService, $specification);
         $command->execute($context);

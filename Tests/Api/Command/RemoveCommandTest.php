@@ -40,10 +40,6 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
             ->setMethods(array('isSatisfiedBy'))
             ->getMock();
 
-        $specification->expects($this->once())
-            ->method('isSatisfiedBy')
-            ->will($this->returnValue(true));
-
         $context = new Context('toto', array());
         $command = new RemoveCommand($remover, $finder, $transformer, $specification);
         $command->execute($context);
