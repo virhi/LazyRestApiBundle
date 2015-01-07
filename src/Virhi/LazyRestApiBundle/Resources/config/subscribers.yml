@@ -1,5 +1,5 @@
 parameters:
-    virhi_rest_api_doctrine.subscriber.object.list.class: Virhi\RestApiDoctrineBundle\Api\Subscriber\Object\ListObjectSubscriber
+    virhi_rest_api_doctrine.subscriber.object.list.class: Virhi\LazyRestApiBundle\Api\Subscriber\Object\ListObjectSubscriber
 
 
 services:

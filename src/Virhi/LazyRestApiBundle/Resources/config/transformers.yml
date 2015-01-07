@@ -1,15 +1,15 @@
 parameters:
-    virhi_rest_api_doctrine.transformer.contexttosearch.entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\ContextToSearch\Entity\EntityTransformer
-    virhi_rest_api_doctrine.transformer.contexttosearch.entity.remove.class: Virhi\RestApiDoctrineBundle\Api\Transformer\ContextToSearch\Entity\RemoveEntityTransformer
-    virhi_rest_api_doctrine.transformer.contexttosearch.entity.list_entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\ContextToSearch\Entity\ListEntityTransformer
+    virhi_rest_api_doctrine.transformer.contexttosearch.entity.entity.class: Virhi\LazyRestApiBundle\Api\Transformer\ContextToSearch\Entity\EntityTransformer
+    virhi_rest_api_doctrine.transformer.contexttosearch.entity.remove.class: Virhi\LazyRestApiBundle\Api\Transformer\ContextToSearch\Entity\RemoveEntityTransformer
+    virhi_rest_api_doctrine.transformer.contexttosearch.entity.list_entity.class: Virhi\LazyRestApiBundle\Api\Transformer\ContextToSearch\Entity\ListEntityTransformer
 
-    virhi_rest_api_doctrine.transformer.contexttosearch.object.list_object.class: Virhi\RestApiDoctrineBundle\Api\Transformer\ContextToSearch\Object\ListObjectTransformer
-    virhi_rest_api_doctrine.transformer.contexttosearch.object.object.class: Virhi\RestApiDoctrineBundle\Api\Transformer\ContextToSearch\Object\ObjectTransformer
+    virhi_rest_api_doctrine.transformer.contexttosearch.object.list_object.class: Virhi\LazyRestApiBundle\Api\Transformer\ContextToSearch\Object\ListObjectTransformer
+    virhi_rest_api_doctrine.transformer.contexttosearch.object.object.class: Virhi\LazyRestApiBundle\Api\Transformer\ContextToSearch\Object\ObjectTransformer
 
-    virhi_rest_api_doctrine.transformer.entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\Entity\EntityTransformer
-    virhi_rest_api_doctrine.transformer.entity.list_entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\Entity\ListEntityTransformer
+    virhi_rest_api_doctrine.transformer.entity.entity.class: Virhi\LazyRestApiBundle\Api\Transformer\Entity\EntityTransformer
+    virhi_rest_api_doctrine.transformer.entity.list_entity.class: Virhi\LazyRestApiBundle\Api\Transformer\Entity\ListEntityTransformer
 
-    virhi_rest_api_doctrine.transformer.form_data_to_entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer
+    virhi_rest_api_doctrine.transformer.form_data_to_entity.entity.class: Virhi\LazyRestApiBundle\Api\Transformer\FormDataToEntity\EntityTransformer
 
 services:
 

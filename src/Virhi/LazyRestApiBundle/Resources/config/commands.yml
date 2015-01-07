@@ -1,7 +1,7 @@
 parameters:
-    virhi_rest_api_doctrine.command.create.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\CreateCommand
-    virhi_rest_api_doctrine.command.update.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\UpdateCommand
-    virhi_rest_api_doctrine.command.remover.entity.class: Virhi\RestApiDoctrineBundle\Api\Command\RemoveCommand
+    virhi_rest_api_doctrine.command.create.entity.class: Virhi\LazyRestApiBundle\Api\Command\CreateCommand
+    virhi_rest_api_doctrine.command.update.entity.class: Virhi\LazyRestApiBundle\Api\Command\UpdateCommand
+    virhi_rest_api_doctrine.command.remover.entity.class: Virhi\LazyRestApiBundle\Api\Command\RemoveCommand
 
 services:
     virhi_rest_api_doctrine.command.create.entity:

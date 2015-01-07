@@ -1,43 +1,43 @@
 virhi_rest_api_doctrine_api:
     path:     /api/doctrine
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Api:api }
+    defaults: { _controller: VirhiLazyRestApiBundle:Api:api }
 
 virhi_rest_api_doctrine_entit_info:
     path:     /api/info
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Api:entitInfo }
+    defaults: { _controller: VirhiLazyRestApiBundle:Api:entitInfo }
 
 virhi_rest_api_doctrine_list_object:
     path:     /api/objects
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Object:listObject }
+    defaults: { _controller: VirhiLazyRestApiBundle:Object:listObject }
 
 virhi_rest_api_doctrine_object:
     path:     /api/object/{name}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Object:object }
+    defaults: { _controller: VirhiLazyRestApiBundle:Object:object }
 
 virhi_rest_api_doctrine_list_entity:
     path:     /api/entitys/{name}/{limit}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Entity:listEntity, limit: null  }
+    defaults: { _controller: VirhiLazyRestApiBundle:Entity:listEntity, limit: null  }
 
 virhi_rest_api_doctrine_entity:
     path:     /api/entity/{name}/{id}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:Entity:entity }
+    defaults: { _controller: VirhiLazyRestApiBundle:Entity:entity }
 
 virhi_rest_api_doctrine_entity_create:
     methods:
         - POST
         - PUT
     path:     /api/create/{name}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:WriteEntity:create }
+    defaults: { _controller: VirhiLazyRestApiBundle:WriteEntity:create }
 
 virhi_rest_api_doctrine_entity_update:
     methods:
         - POST
         - PUT
     path:     /api/update/{name}/{id}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:WriteEntity:update }
+    defaults: { _controller: VirhiLazyRestApiBundle:WriteEntity:update }
 
 virhi_rest_api_doctrine_entity_remove:
     methods:
         - DELETE
     path:     /api/remove/{name}/{id}
-    defaults: { _controller: VirhiRestApiDoctrineBundle:WriteEntity:remove }
+    defaults: { _controller: VirhiLazyRestApiBundle:WriteEntity:remove }

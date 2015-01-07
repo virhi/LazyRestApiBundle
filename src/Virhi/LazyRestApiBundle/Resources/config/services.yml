@@ -7,9 +7,9 @@ imports:
     - { resource: specifications.yml }
 
 parameters:
-    virhi_rest_api_doctrine.service.entity_namespace.class: Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService
-    virhi_rest_api_doctrine.service.object.class: Virhi\RestApiDoctrineBundle\Api\Service\ObjectService
-    virhi_rest_api_doctrine.service.entity.class: Virhi\RestApiDoctrineBundle\Api\Service\EntityService
+    virhi_rest_api_doctrine.service.entity_namespace.class: Virhi\LazyRestApiBundle\Api\Service\EntityNamespaceService
+    virhi_rest_api_doctrine.service.object.class: Virhi\LazyRestApiBundle\Api\Service\ObjectService
+    virhi_rest_api_doctrine.service.entity.class: Virhi\LazyRestApiBundle\Api\Service\EntityService
 
 services:
     virhi_rest_api_doctrine.service.entity_namespace:

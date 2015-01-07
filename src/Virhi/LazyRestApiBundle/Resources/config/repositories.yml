@@ -1,12 +1,12 @@
 parameters:
-    virhi_rest_api_doctrine.repository.entity.finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder
-    virhi_rest_api_doctrine.repository.entity.list_finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\ListFinder
-    virhi_rest_api_doctrine.repository.entity.count_list_finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\CountListFinder
-    virhi_rest_api_doctrine.repository.entity.attacher.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Attacher
-    virhi_rest_api_doctrine.repository.entity.remover.class: Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Remover
+    virhi_rest_api_doctrine.repository.entity.finder.class: Virhi\LazyRestApiBundle\Api\Repository\Entity\Finder
+    virhi_rest_api_doctrine.repository.entity.list_finder.class: Virhi\LazyRestApiBundle\Api\Repository\Entity\ListFinder
+    virhi_rest_api_doctrine.repository.entity.count_list_finder.class: Virhi\LazyRestApiBundle\Api\Repository\Entity\CountListFinder
+    virhi_rest_api_doctrine.repository.entity.attacher.class: Virhi\LazyRestApiBundle\Api\Repository\Entity\Attacher
+    virhi_rest_api_doctrine.repository.entity.remover.class: Virhi\LazyRestApiBundle\Api\Repository\Entity\Remover
 
-    virhi_rest_api_doctrine.repository.object.finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Object\Finder
-    virhi_rest_api_doctrine.repository.object.list_finder.class: Virhi\RestApiDoctrineBundle\Api\Repository\Object\ListFinder
+    virhi_rest_api_doctrine.repository.object.finder.class: Virhi\LazyRestApiBundle\Api\Repository\Object\Finder
+    virhi_rest_api_doctrine.repository.object.list_finder.class: Virhi\LazyRestApiBundle\Api\Repository\Object\ListFinder
 
 services:
 

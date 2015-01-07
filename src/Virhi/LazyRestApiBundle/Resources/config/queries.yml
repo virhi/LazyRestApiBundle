@@ -1,9 +1,9 @@
 parameters:
-    virhi_rest_api_doctrine.query.entity.entity.class: Virhi\RestApiDoctrineBundle\Api\Query\Entity\EntityQuery
-    virhi_rest_api_doctrine.query.entity.list_entity.class: Virhi\RestApiDoctrineBundle\Api\Query\Entity\ListEntityQuery
+    virhi_rest_api_doctrine.query.entity.entity.class: Virhi\LazyRestApiBundle\Api\Query\Entity\EntityQuery
+    virhi_rest_api_doctrine.query.entity.list_entity.class: Virhi\LazyRestApiBundle\Api\Query\Entity\ListEntityQuery
 
-    virhi_rest_api_doctrine.query.object.object.class: Virhi\RestApiDoctrineBundle\Api\Query\Object\ObjectQuery
-    virhi_rest_api_doctrine.query.object.list_object.class: Virhi\RestApiDoctrineBundle\Api\Query\Object\ListObjectQuery
+    virhi_rest_api_doctrine.query.object.object.class: Virhi\LazyRestApiBundle\Api\Query\Object\ObjectQuery
+    virhi_rest_api_doctrine.query.object.list_object.class: Virhi\LazyRestApiBundle\Api\Query\Object\ListObjectQuery
 
 services:
 
