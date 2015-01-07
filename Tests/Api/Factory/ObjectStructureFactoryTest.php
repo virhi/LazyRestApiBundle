@@ -6,9 +6,9 @@
  * Time: 00:55
  */
 
-namespace Virhi\RestApiDoctrineBundle\Tests\Api\Factory;
+namespace Virhi\LazyRestApiBundle\Tests\Api\Factory;
 
-use Virhi\RestApiDoctrineBundle\Api\Factory\ObjectStructureFactory;
+use Virhi\LazyRestApiBundle\Api\Factory\ObjectStructureFactory;
 
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -62,7 +62,7 @@ class ObjectStructureFactoryTest extends \PHPUnit_Framework_TestCase
         $entity = array('name' => 'dummy');
 
         $actual = ObjectStructureFactory::buildObjectStructure($doctrine, $metadata, $table, $entity);
-        $this->assertInstanceOf('\Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure', $actual);
+        $this->assertInstanceOf('\Virhi\LazyRestApiBundle\Api\ValueObject\ObjectStructure', $actual);
         $this->assertTrue($actual->hasField('name'));
         $this->assertEquals('dummy', $actual->getFields()->offsetGet('name')->getValue());
     }

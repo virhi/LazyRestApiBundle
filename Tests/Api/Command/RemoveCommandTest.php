@@ -6,13 +6,13 @@
  * Time: 19:06
  */
 
-namespace Virhi\RestApiDoctrineBundle\Tests\Api\Command;
+namespace Virhi\LazyRestApiBundle\Tests\Api\Command;
 
-use Virhi\RestApiDoctrineBundle\Api\Command\RemoveCommand;
-use Virhi\RestApiDoctrineBundle\Api\Command\Context\RemoveContext;
-use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
+use Virhi\LazyRestApiBundle\Api\Command\RemoveCommand;
+use Virhi\LazyRestApiBundle\Api\Command\Context\RemoveContext;
+use Virhi\LazyRestApiBundle\Api\Command\Context\Context;
 use Virhi\Component\Search\Search;
-use Virhi\RestApiDoctrineBundle\Api\ValueObject\ObjectStructure;
+use Virhi\LazyRestApiBundle\Api\ValueObject\ObjectStructure;
 
 class RemoveCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\RuntimeException');
 
 
-        $finder = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder')
+        $finder = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Repository\Entity\Finder')
             ->disableOriginalConstructor()
             ->setMethods(array('find'))
             ->getMock();
@@ -35,7 +35,7 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityDeleteSpecification')
+        $specification = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Specification\AuthorizedEntityDeleteSpecification')
             ->disableOriginalConstructor()
             ->setMethods(array('isSatisfiedBy'))
             ->getMock();
@@ -47,7 +47,7 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
 
     public function testExecuteWillRemoveObject()
     {
-        $finder = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Repository\Entity\Finder')
+        $finder = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Repository\Entity\Finder')
             ->disableOriginalConstructor()
             ->setMethods(array('find'))
             ->getMock();
@@ -74,7 +74,7 @@ class RemoveCommandTest extends \PHPUnit_Framework_TestCase
             ->method('remove')
             ->will($this->returnValue(null));
 
-        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityDeleteSpecification')
+        $specification = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Specification\AuthorizedEntityDeleteSpecification')
             ->disableOriginalConstructor()
             ->setMethods(array('isSatisfiedBy'))
             ->getMock();

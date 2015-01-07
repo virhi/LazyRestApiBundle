@@ -6,10 +6,10 @@
  * Time: 09:05
  */
 
-namespace Virhi\RestApiDoctrineBundle\Tests\Api\Command;
+namespace Virhi\LazyRestApiBundle\Tests\Api\Command;
 
-use Virhi\RestApiDoctrineBundle\Api\Command\CreateCommand;
-use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
+use Virhi\LazyRestApiBundle\Api\Command\CreateCommand;
+use Virhi\LazyRestApiBundle\Api\Command\Context\Context;
 
 class CreateCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class CreateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('attach')
             ->will($this->returnValue(null));
 
-        $entityNamespaceService = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService')
+        $entityNamespaceService = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Service\EntityNamespaceService')
             ->disableOriginalConstructor()
             ->setMethods(array('getEntityFullName'))
             ->getMock();
@@ -33,7 +33,7 @@ class CreateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('getEntityFullName')
             ->will($this->returnValue('\stdClass'));
 
-        $transformer = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer')
+        $transformer = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Transformer\FormDataToEntity\EntityTransformer')
             ->disableOriginalConstructor()
             ->setMethods(array('transform'))
             ->getMock();
@@ -42,7 +42,7 @@ class CreateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('transform')
             ->will($this->returnValue(null));
 
-        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityCreationSpecification')
+        $specification = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Specification\AuthorizedEntityCreationSpecification')
             ->disableOriginalConstructor()
             ->setMethods(array('isSatisfiedBy'))
             ->getMock();

@@ -6,10 +6,10 @@
  * Time: 19:56
  */
 
-namespace Virhi\RestApiDoctrineBundle\Tests\Api\Command;
+namespace Virhi\LazyRestApiBundle\Tests\Api\Command;
 
-use Virhi\RestApiDoctrineBundle\Api\Command\UpdateCommand;
-use Virhi\RestApiDoctrineBundle\Api\Command\Context\Context;
+use Virhi\LazyRestApiBundle\Api\Command\UpdateCommand;
+use Virhi\LazyRestApiBundle\Api\Command\Context\Context;
 use Virhi\Component\Search\Search;
 
 class UpdateCommandTest extends \PHPUnit_Framework_TestCase
@@ -27,18 +27,18 @@ class UpdateCommandTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $transformer = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer')
+        $transformer = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Transformer\FormDataToEntity\EntityTransformer')
             ->disableOriginalConstructor()
             ->setMethods(array('transform'))
             ->getMock();
 
-        $entityNamespaceService = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService')
+        $entityNamespaceService = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Service\EntityNamespaceService')
             ->disableOriginalConstructor()
             ->setMethods(array('getEntityFullName'))
             ->getMock();
 
 
-        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityUpdateSpecification')
+        $specification = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Specification\AuthorizedEntityUpdateSpecification')
             ->disableOriginalConstructor()
             ->setMethods(array('isSatisfiedBy'))
             ->getMock();
@@ -59,7 +59,7 @@ class UpdateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('attach')
             ->will($this->returnValue(null));
 
-        $transformer = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Transformer\FormDataToEntity\EntityTransformer')
+        $transformer = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Transformer\FormDataToEntity\EntityTransformer')
             ->disableOriginalConstructor()
             ->setMethods(array('transform'))
             ->getMock();
@@ -68,7 +68,7 @@ class UpdateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('transform')
             ->will($this->returnValue(null));
 
-        $entityNamespaceService = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Service\EntityNamespaceService')
+        $entityNamespaceService = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Service\EntityNamespaceService')
             ->disableOriginalConstructor()
             ->setMethods(array('getEntityFullName'))
             ->getMock();
@@ -77,7 +77,7 @@ class UpdateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('getEntityFullName')
             ->will($this->returnValue('\stdClass'));
 
-        $specification = $this->getMockBuilder('\Virhi\RestApiDoctrineBundle\Api\Specification\AuthorizedEntityUpdateSpecification')
+        $specification = $this->getMockBuilder('\Virhi\LazyRestApiBundle\Api\Specification\AuthorizedEntityUpdateSpecification')
             ->disableOriginalConstructor()
             ->setMethods(array('isSatisfiedBy'))
             ->getMock();
