@@ -59,35 +59,35 @@ the response will be like :
             }
             
             1:  {
-                name: "Namespace\..\YourEntity2"
-                identifier: [1]
+                "name": "Namespace\..\YourEntity2"
+                "identifier": [1]
                     0:  "id"
                 
-                fields: [2]
+                "fields": [2]
                     0:  {
-                        name: "id"
-                        value: null
-                        type: {}
-                        definition: null
-                        notnull: true
-                        length: null
-                        comment: ""
-                        auto_increment: true
+                        "name": "id"
+                        "value": null
+                        "type": {}
+                        "definition": null
+                        "notnull": true
+                        "length": null
+                        "comment": ""
+                        "auto_increment": true
                     }
                     1:  {
-                        name: "titre"
-                        value: null
-                        type: {}
-                        definition: null
-                        notnull: true
-                        length: 255
-                        comment: ""
-                        auto_increment: false
+                        "name": "titre"
+                        "value": null
+                        "type": {}
+                        "definition": null
+                        "notnull": true
+                        "length": 255
+                        "comment": ""
+                        "auto_increment": false
                     }
-                embeds: {}
-                _links: {
-                    self: {
-                        href: ""
+                "embeds": {}
+                "_links": {
+                    "self": {
+                        "href": ""
                     }
                 }
             }
@@ -116,41 +116,41 @@ When you Request
 
 ```json
 {
-    name: "Namespace\..\YourEntity"
-    identifier: [1]
+    "name": "Namespace\..\YourEntity"
+    "identifier": [1]
         0:  "id"
-    fields: [2]
+    "fields": [2]
         0:  {
-            name: "id"
-            value: null
-            type: {}
-            definition: null
-            notnull: true
-            length: null
-            comment: ""
-            auto_increment: true
+            "name": "id"
+            "value": null
+            "type": {}
+            "definition": null
+            "notnull": true
+            "length": null
+            "comment": ""
+            "auto_increment": true
         }
         1:  {
-            name: "titre"
-            value: null
-            type: {}
-            definition: null
-            notnull: true
-            length: 255
-            comment: ""
-            auto_increment: false
+            "name": "titre"
+            "value": null
+            "type": {}
+            "definition": null
+            "notnull": true
+            "length": 255
+            "comment": ""
+            "auto_incremen"t: false
         }
-    embeds: {
-        tags: [1]
+    "embeds": {
+        "tags": [1]
             0:  {
-                fieldName: "yourEntity2s"
-                entityName: "yourEntity2"
-                entities: [0]
+                "fieldName": "yourEntity2s"
+                "entityName": "yourEntity2"
+                "entities": [0]
             }
     }
-    _links: {
-        self: {
-            href: ""
+    "_links": {
+        "self": {
+            "href": ""
         }
     }
 }
