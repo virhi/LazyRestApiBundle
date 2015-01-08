@@ -1,6 +1,6 @@
 #LazyRestApiBundle
 
-Generate easily and automatically a API REST whit doctrine.
+Generate easily and automatically a API REST whit doctrine. CRUD action are available.
 
 ##Installation
 
@@ -46,3 +46,5 @@ virhi_lazy_rest_api:
     expose_entities:
         your_entity: { entity_name: Namespace\YourEntity, edit_mode: false, delete_mode: true, create_mode: true }
 ```
+
+[Documentation](Documentation/ExposeEntity)
