@@ -10,50 +10,50 @@ the response will be like :
 
 ```json
 {
-    _links: {
-        self: {
-            href: ""
+    "_links": {
+        "self": {
+            "href": ""
         }
     }
-    _embedded: {
-        tables: [2]
+    "_embedded": {
+        "tables": [2]
             0:  {
-                name: "Namespace\..\YourEntity"
-                identifier: [1]
+                "name": "Namespace\..\YourEntity"
+                "identifier": [1]
                     0:  "id"
                 
-                fields: [2]
+                "fields": [2]
                     0:  {
-                        name: "id"
-                        value: null
-                        type: {}
-                        definition: null
-                        notnull: true
-                        length: null
-                        comment: ""
-                        auto_increment: true
+                        "name": "id"
+                        "value": null
+                        "type": {}
+                        "definition": null
+                        "notnull": true
+                        "length": null
+                        "comment": ""
+                        "auto_increment": true
                     }
                     1:  {
-                        name: "titre"
-                        value: null
-                        type: {}
-                        definition: null
-                        notnull: true
-                        length: 255
-                        comment: ""
-                        auto_increment: false
+                        "name": "titre"
+                        "value": null
+                        "type": {}
+                        "definition": null
+                        "notnull": true
+                        "length": 255
+                        "comment": ""
+                        "auto_increment": false
                     }
-                embeds: {
-                    tags: [1]
+                "embeds": {
+                    "yourEntity2s": [1]
                         0:  {
-                            fieldName: "yourEntity2s"
-                            entityName: "yourEntity2"
-                            entities: [0]
+                            "fieldName": "yourEntity2s"
+                            "entityName": "yourEntity2"
+                            "entities": [0]
                         }
                 }
-                _links: {
-                    self: {
-                        href: ""
+                "_links": {
+                    "self": {
+                        "href": ""
                     }
                 }
             }
