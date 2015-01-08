@@ -1,1 +1,1 @@
-[Expose entity](ExposeEntity)
+[Expose entity](ExposeEntity.md)

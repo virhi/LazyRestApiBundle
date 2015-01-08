@@ -47,4 +47,4 @@ virhi_lazy_rest_api:
         your_entity: { entity_name: Namespace\YourEntity, edit_mode: false, delete_mode: true, create_mode: true }
 ```
 
-[Documentation](Documentation/ExposeEntity)
+[Documentation](./Documentation/index.md)
