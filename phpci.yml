@@ -5,7 +5,8 @@ build_settings:
 setup:
     composer:
         action: "install"
-    shell: sh init.sh
+    shell:
+        - "sh init.sh"
 
 test:
     php_unit:
