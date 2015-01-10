@@ -49,7 +49,7 @@ class ListFinder extends BaseRepository implements ListFinderInterface
         $metadatas = $em->getMetadataFactory()->getAllMetadata();
 
         foreach ($metadatas as $tmpMetadata) {
-            $metadata       = $this->getDoctrine()->getEntityManager()->getClassMetadata($tmpMetadata->getName());
+            $metadata       = $this->getDoctrine()->getManager()->getClassMetadata($tmpMetadata->getName());
             $table          = $this->getTable($tmpMetadata->table["name"]);
             $objStructure   = ObjectStructureFactory::buildObjectStructure($this->getDoctrine(), $metadata, $table);
             $result[]       = $objStructure;
