@@ -1,0 +1,20 @@
+Virhi\LazyRestApiBundle\Tests\Fixtures\App\app\Entity\Post:
+    type: entity
+    table: post
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        titre:
+            type: string
+        post:
+            column: user_email
+            type: string
+            nullable: true
+        sousTitre:
+            type: string
+            nullable: true
+        description:
+            type: text
+            nullable: true

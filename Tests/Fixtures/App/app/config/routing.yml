@@ -1,3 +1,0 @@
-virhi_ui_rest_api_doctrine:
-    resource: "@VirhiLazyRestApiUiBundle/Resources/config/routing.yml"
-    prefix:   /

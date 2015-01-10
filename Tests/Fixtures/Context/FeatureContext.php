@@ -1,6 +1,6 @@
 <?php
 
-namespace LazyRestApiBundle;
+namespace Virhi\LazyRestApiBundle\Tests\Fixtures\Context;
 
 use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Context\TranslatedContextInterface,
@@ -13,6 +13,7 @@ use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Symfony\Component\Process\Process;
+use \PHPUnit_Framework_TestCase;
 
 /**
  * Features context.

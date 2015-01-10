@@ -1,6 +1,6 @@
 framework:
     secret:          Hell yeah!
-    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    router:          { resource: "%kernel.root_dir%/Resources/config/routing.yml" }
     form:            true
     csrf_protection: true
     session:         ~
@@ -24,7 +24,11 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-
+                    LazyRestApiBundle:
+                        type: yml
+                        dir: %kernel.root_dir%/Resources/config/orm
+                        prefix: Virhi\LazyRestApiBundle\Tests\Fixtures\App\app\Entity
+                        is_bundle: false
 
 virhi_lazy_rest_api:
-    manager: VirhiDomainBundle
+    manager: LazyRestApiBundle

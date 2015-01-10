@@ -1,11 +1,12 @@
 <?php
 
-namespace LazyRestApiBundle;
+namespace Virhi\LazyRestApiBundle\Tests\Fixtures\Context;
 
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
+use \PHPUnit_Framework_Assert;
 
 
 /**
@@ -154,7 +155,7 @@ class WebApiContext extends MinkContext
      */
     public function theResponseShouldContain($text)
     {
-        assertRegExp('/'.preg_quote($text).'/', $this->getClient()->getResponse()->getContent());
+        PHPUnit_Framework_Assert::assertRegExp('/'.preg_quote($text).'/', $this->getClient()->getResponse()->getContent());
     }
 
     /**
@@ -167,7 +168,7 @@ class WebApiContext extends MinkContext
      */
     public function theResponseShouldNotContain($text)
     {
-        assertNotRegExp('/'.preg_quote($text).'/', $this->getClient()->getResponse()->getContent());
+        PHPUnit_Framework_Assert::assertNotRegExp('/'.preg_quote($text).'/', $this->getClient()->getResponse()->getContent());
     }
 
     /**
@@ -175,7 +176,7 @@ class WebApiContext extends MinkContext
      */
     public function theResponseCodeShouldBe($code)
     {
-        assertSame(intval($code), $this->getStatus($this->getClient()->getResponse()));
+        PHPUnit_Framework_Assert::assertSame(intval($code), $this->getStatus($this->getClient()->getResponse()));
     }
 
     /**
@@ -199,10 +200,10 @@ class WebApiContext extends MinkContext
         if(null === $actual) {
             $actual = array();
         }
-        assertCount(sizeof($etalon), $actual);
+        PHPUnit_Framework_Assert::assertCount(sizeof($etalon), $actual);
         foreach ($actual as $key => $needle) {
-            assertArrayHasKey($key, $etalon);
-            assertEquals($etalon[$key], $actual[$key]);
+            PHPUnit_Framework_Assert::assertArrayHasKey($key, $etalon);
+            PHPUnit_Framework_Assert::assertEquals($etalon[$key], $actual[$key]);
         }
     }
 

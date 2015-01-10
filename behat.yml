@@ -1,9 +1,11 @@
 default:
     paths:
         features: ./Tests/Fixtures/Features # features should be localized in each bundle
-        bootstrap: ./Tests/Fixtures/Context/LazyRestApiBundle
+        bootstrap: ./Tests/Fixtures/Context
     context:
-        class: FeatureContext
+        class: Virhi\LazyRestApiBundle\Tests\Fixtures\Context\FeatureContext
+        parameters:
+            base_url: https://api.github.com
     extensions:
         Behat\Symfony2Extension\Extension:
             mink_driver: true
@@ -11,5 +13,6 @@ default:
                 class: AppKernel
                 path: ./Tests/Fixtures/App/app/AppKernel.php
                 bootstrap: vendor/autoload.php
+                env: dev
         Behat\MinkExtension\Extension:
             default_session: 'symfony2'
