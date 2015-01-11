@@ -6,7 +6,7 @@ setup:
     composer:
         action: "install"
     shell:
-        - "sh init.sh"
+        - "./init.sh"
 
 test:
     php_unit:
