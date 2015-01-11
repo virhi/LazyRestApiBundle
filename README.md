@@ -2,6 +2,8 @@
 
 Generate easily and automatically a API REST whit doctrine. CRUD action are available.
 
+![alt text](http://phpci.virhiweb.fr/build-status/image/2 "phpci")
+
 ##Installation
 
 Edit your `composer.json`:
