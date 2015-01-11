@@ -6,7 +6,11 @@ setup:
     composer:
         action: "install"
     shell:
-        - "./init.sh"
+        - "php Tests/Fixtures/App/app/console doctrine:schema:drop --force"
+        - "php Tests/Fixtures/App/app/console doctrine:database:drop --force"
+        - "php Tests/Fixtures/App/app/console doctrine:database:create"
+        - "php Tests/Fixtures/App/app/console doctrine:schema:create"
+        - "php Tests/Fixtures/App/app/console khepin:yamlfixtures:load"
 
 test:
     php_unit:
