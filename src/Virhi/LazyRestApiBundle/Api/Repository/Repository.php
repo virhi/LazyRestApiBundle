@@ -9,7 +9,7 @@ namespace Virhi\LazyRestApiBundle\Api\Repository;
  * Time: 23:14
  */
 
-use Virhi\Component\Repository\Repository as BaseRepository;
+use Virhi\Component\Repository\ORM\Repository as BaseRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;

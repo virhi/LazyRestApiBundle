@@ -23,7 +23,7 @@ class UpdateCommandTest extends \PHPUnit_Framework_TestCase
             ->setMethods(array('attach'))
             ->getMock();
 
-        $attacher = $this->getMockBuilder('\Virhi\Component\Repository\Attacher')
+        $attacher = $this->getMockBuilder('\Virhi\Component\Repository\ORM\Attacher')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -50,7 +50,7 @@ class UpdateCommandTest extends \PHPUnit_Framework_TestCase
 
     public function testExecute()
     {
-        $attacher = $this->getMockBuilder('\Virhi\Component\Repository\Attacher')
+        $attacher = $this->getMockBuilder('\Virhi\Component\Repository\ORM\Attacher')
             ->disableOriginalConstructor()
             ->setMethods(array('attach'))
             ->getMock();

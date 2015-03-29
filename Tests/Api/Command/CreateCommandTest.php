@@ -15,7 +15,7 @@ class CreateCommandTest extends \PHPUnit_Framework_TestCase
 {
     public function testExecute()
     {
-        $attacher = $this->getMockBuilder('\Virhi\Component\Repository\Attacher')
+        $attacher = $this->getMockBuilder('\Virhi\Component\Repository\ORM\Attacher')
             ->disableOriginalConstructor()
             ->setMethods(array('attach'))
             ->getMock();
